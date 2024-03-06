@@ -1,0 +1,188 @@
+﻿<Window x:Class="AdCapGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Adventure Capitalist Like Game"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Self}}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="ProgressBar">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="#B04FB0FF"/>
+            <!-- Setter for smoothness -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="5">
+                            <Grid x:Name="PART_Track">
+                                <Rectangle x:Name="PART_Indicator" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <!-- Setter for smoothing out the background border -->
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Window.Background>
+        <ImageBrush ImageSource="/Assets/Main.jpg" Stretch="UniformToFill" x:Name="BackgroundImage"/>
+    </Window.Background>
+
+    <Viewbox Name="ViewboxMain">
+        <DockPanel>
+
+            <Menu DockPanel.Dock="Top" Background="Transparent">
+                <Button Content="Save" Background="Black" Foreground="White" Click="Save_Click"/>
+                <Button Content="Load" Background="Black" Foreground="White" Click="Load_Click"/>
+                <Button Content="Upgrade Menu" Background="Black" Foreground="White" HorizontalAlignment="Left" Click="UpgradeMenu_Click"/>
+                <Button Content="Prestige Menu" Background="Black" Foreground="White" HorizontalAlignment="Left" Click="PrestigeMenu_Click"/>
+            </Menu>
+
+            <Grid DockPanel.Dock="Top">
+                <!-- Header -->
+                <TextBlock Text="Your Businesses" FontWeight="Bold" FontSize="20"
+                           HorizontalAlignment="Center" Margin="0,35,0,10" VerticalAlignment="Center" Style="{x:Null}" Foreground="White"/>
+                <TextBlock Text="Total Revenue: $5" FontWeight="Bold" FontSize="20"
+                           HorizontalAlignment="Center" Margin="0,10,0,20" VerticalAlignment="Center" Name="CurrencyLabel" Style="{x:Null}" Foreground="White"/>
+            </Grid>
+
+            <!-- Business Grid -->
+            <Grid Margin="5" Background="#80000000">
+                <!-- Column Definitions -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Business Headers -->
+                <TextBlock Grid.Column="0" Text="Business" FontWeight="Bold"/>
+                <TextBlock Grid.Column="1" Text="Owned" FontWeight="Bold"/>
+                <TextBlock Grid.Column="2" Text="Revenue" FontWeight="Bold"/>
+                <TextBlock Grid.Column="3" Text="Progress" FontWeight="Bold"/>
+                <TextBlock Grid.Column="4" Text="Upgrade" FontWeight="Bold"/>
+
+                <!-- Business Rows -->
+
+                <!-- Business 1 -->
+                <TextBlock Grid.Row="1" Text="Business 1" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Owned: 1" VerticalAlignment="Center" Name="B1OwnedText"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="$1" VerticalAlignment="Center" Name="B1Rev"/>
+                <ProgressBar Grid.Row="1" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B1Prog"/>
+                <Button Grid.Row="1" Grid.Column="4" Content="$4" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B1UpgradeButton"/>
+
+                <!-- Business 2 -->
+                <TextBlock Grid.Row="2" Text="Business 2" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B2OwnedText"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="$60" VerticalAlignment="Center" Name="B2Rev"/>
+                <ProgressBar Grid.Row="2" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B2Prog"/>
+                <Button Grid.Row="2" Grid.Column="4" Content="$60" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B2UpgradeButton"/>
+
+                <!-- Business 3 -->
+                <TextBlock Grid.Row="3" Text="Business 3" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B3OwnedText"/>
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="$540" VerticalAlignment="Center" Name="B3Rev"/>
+                <ProgressBar Grid.Row="3" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B3Prog"/>
+                <Button Grid.Row="3" Grid.Column="4" Content="$720" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B3UpgradeButton"/>
+
+                <!-- Business 4-->
+                <TextBlock Grid.Row="4" Text="Business 4" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B4OwnedText"/>
+                <TextBlock Grid.Row="4" Grid.Column="2" Text="$4320" VerticalAlignment="Center" Name="B4Rev"/>
+                <ProgressBar Grid.Row="4" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B4Prog"/>
+                <Button Grid.Row="4" Grid.Column="4" Content="$8640" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B4UpgradeButton"/>
+
+                <!-- Business 5 -->
+                <TextBlock Grid.Row="5" Text="Business 5" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B5OwnedText"/>
+                <TextBlock Grid.Row="5" Grid.Column="2" Text="$51840" VerticalAlignment="Center" Name="B5Rev"/>
+                <ProgressBar Grid.Row="5" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B5Prog"/>
+                <Button Grid.Row="5" Grid.Column="4" Content="$103680" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B5UpgradeButton"/>
+
+                <!-- Business 6 -->
+                <TextBlock Grid.Row="6" Text="Business 6" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="6" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B6OwnedText"/>
+                <TextBlock Grid.Row="6" Grid.Column="2" Text="$622K" VerticalAlignment="Center" Name="B6Rev"/>
+                <ProgressBar Grid.Row="6" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B6Prog"/>
+                <Button Grid.Row="6" Grid.Column="4" Content="$1.2M" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B6UpgradeButton"/>
+
+                <!-- Business 7 -->
+                <TextBlock Grid.Row="7" Text="Business 7" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="7" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B7OwnedText"/>
+                <TextBlock Grid.Row="7" Grid.Column="2" Text="$7.5M" VerticalAlignment="Center" Name="B7Rev"/>
+                <ProgressBar Grid.Row="7" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B7Prog"/>
+                <Button Grid.Row="7" Grid.Column="4" Content="15M" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B7UpgradeButton"/>
+
+                <!-- Business 8 -->
+                <TextBlock Grid.Row="8" Text="Business 8" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="8" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B8OwnedText"/>
+                <TextBlock Grid.Row="8" Grid.Column="2" Text="$90M" VerticalAlignment="Center" Name="B8Rev"/>
+                <ProgressBar Grid.Row="8" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B8Prog"/>
+                <Button Grid.Row="8" Grid.Column="4" Content="179M" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B8UpgradeButton"/>
+
+                <!-- Business 9 -->
+                <TextBlock Grid.Row="9" Text="Business 9" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="9" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B9OwnedText"/>
+                <TextBlock Grid.Row="9" Grid.Column="2" Text="$1B" VerticalAlignment="Center" Name="B9Rev"/>
+                <ProgressBar Grid.Row="9" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B9Prog"/>
+                <Button Grid.Row="9" Grid.Column="4" Content="$2.1B" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B9UpgradeButton"/>
+
+                <!-- Business 10 -->
+                <TextBlock Grid.Row="10" Text="Business 10" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="10" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B10OwnedText"/>
+                <TextBlock Grid.Row="10" Grid.Column="2" Text="$30B" VerticalAlignment="Center" Name="B10Rev"/>
+                <ProgressBar Grid.Row="10" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B10Prog"/>
+                <Button Grid.Row="10" Grid.Column="4" Content="$25.7B" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B10UpgradeButton"/>
+            </Grid>
+        </DockPanel>
+    </Viewbox>
+</Window>

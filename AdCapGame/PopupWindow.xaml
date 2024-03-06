@@ -1,0 +1,13 @@
+﻿<Window x:Class="AdCapGame.PopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PopupWindow" Height="100" Width="300"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#EFFFFFFF"
+        Topmost="True"
+        Opacity="0.5">
+    <Grid>
+        <TextBlock x:Name="messageTextBlock" Text="Your Message Here" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+    </Grid>
+</Window>

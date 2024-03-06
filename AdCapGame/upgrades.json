@@ -1,0 +1,477 @@
+[
+  {
+    "Description": "Triple Business 1 profit",
+    "CostText": "\"250K\"",
+    "CostValue": 250000.0
+  },
+  {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"500K\"",
+    "CostValue": 500000.0
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"1M\"",
+    "CostValue": 1000000.0
+  },
+  {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"5M\"",
+    "CostValue": 5000000.0
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"25M\"",
+    "CostValue": 25000000.0
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"500M\"",
+    "CostValue": 500000000.0
+  },
+  {
+    "Description": "Triple Business 8 profit",
+    "CostText": "\"10B\"",
+    "CostValue": 10000000000.0
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"50B\"",
+    "CostValue": 50000000000.0
+  },
+  {
+    "Description": "Triple All Businesses profit",
+    "CostText": "\"1T\"",
+    "CostValue": 1000000000000.0
+  },
+  {
+    "Description": "Triple Business 1 profit",
+    "CostText": "\"20T\"",
+    "CostValue": 20000000000000.0
+  },
+  {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"50T\"",
+    "CostValue": 50000000000000.0
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"100T\"",
+    "CostValue": 100000000000000.0
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"2Qa\"",
+    "CostValue": 2E+15
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"5Qa\"",
+    "CostValue": 5E+15
+  },
+  {
+    "Description": "Triple Business 8 profit",
+    "CostText": "\"7Qa\"",
+    "CostValue": 7E+15
+  },
+  {
+    "Description": "Triple Business 10 profit",
+    "CostText": "\"20Qa\"",
+    "CostValue": 2E+16
+  },
+  {
+    "Description": "Triple All Businesses profit",
+    "CostText": "\"50Qa\"",
+    "CostValue": 5E+16
+  },
+  {
+    "Description": "Upgrade level effectiveness +1%",
+    "CostText": "\"100Qa\"",
+    "CostValue": 1E+17
+  },
+  {
+    "Description": "Triple Business 1 profit",
+    "CostText": "\"2Qu\"",
+    "CostValue": 2E+18
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"7Qu\"",
+    "CostValue": 7E+18
+  },
+  {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"10Qu\"",
+    "CostValue": 1E+19
+  },
+  {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"20Qu\"",
+    "CostValue": 2E+19
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"35Qu\"",
+    "CostValue": 3.5E+19
+  },
+  {
+    "Description": "Triple Business 8 profit",
+    "CostText": "\"75Qu\"",
+    "CostValue": 7.5E+19
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"100Qu\"",
+    "CostValue": 1E+20
+  },
+  {
+    "Description": "Triple Business 10 profit",
+    "CostText": "\"200Qu\"",
+    "CostValue": 2E+20
+  },
+  {
+    "Description": "Triple All Businesses profit",
+    "CostText": "\"500Qu\"",
+    "CostValue": 5E+20
+  },
+  {
+    "Description": "Triple Business 1 profit",
+    "CostText": "\"25Sx\"",
+    "CostValue": 2.5E+22
+  },
+  {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"50Sx\"",
+    "CostValue": 5E+22
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"100Sx\"",
+    "CostValue": 1E+23
+  },
+  {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"200Sx\"",
+    "CostValue": 2E+23
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"400Sx\"",
+    "CostValue": 4E+23
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"500Sx\"",
+    "CostValue": 5E+23
+  },
+  {
+    "Description": "Triple Business 8 profit",
+    "CostText": "\"600Sx\"",
+    "CostValue": 6E+23
+  },
+  {
+    "Description": "Triple Business 10 profit",
+    "CostText": "\"800Sx\"",
+    "CostValue": 8E+23
+  },
+  {
+    "Description": "Triple All Businesses profit",
+    "CostText": "\"900Sx\"",
+    "CostValue": 9E+23
+  },
+  {
+    "Description": "Upgrade level effectiveness +2%",
+    "CostText": "\"10Sp\"",
+    "CostValue": 1E+25
+  },
+  {
+    "Description": "Multiply Business 1 profit by 7",
+    "CostText": "\"1Oc\"",
+    "CostValue": 1E+27
+  },
+  {
+    "Description": "Multiply Business 3 profit by 7",
+    "CostText": "\"25Oc\"",
+    "CostValue": 2.5E+28
+  },
+  {
+    "Description": "Multiply Business 4 profit by 7",
+    "CostText": "\"100Oc\"",
+    "CostValue": 1E+29
+  },
+  {
+    "Description": "Multiply Business 5 profit by 7",
+    "CostText": "\"250Oc\"",
+    "CostValue": 2.5E+29
+  },
+  {
+    "Description": "Multiply Business 6 profit by 7",
+    "CostText": "\"500Oc\"",
+    "CostValue": 5E+29
+  },
+  {
+    "Description": "Multiply Business 7 profit by 7",
+    "CostText": "\"1No\"",
+    "CostValue": 1E+30
+  },
+  {
+    "Description": "Multiply Business 8 profit by 7",
+    "CostText": "\"5No\"",
+    "CostValue": 5E+30
+  },
+  {
+    "Description": "Multiply Business 9 profit by 7",
+    "CostText": "\"25No\"",
+    "CostValue": 2.5E+31
+  },
+  {
+    "Description": "Multiply Business 10 profit by 7",
+    "CostText": "\"100No\"",
+    "CostValue": 1E+32
+  },
+  {
+    "Description": "Multiply All Businesses profit by 7",
+    "CostText": "\"1Td\"",
+    "CostValue": 1E+36
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"25Td\"",
+    "CostValue": 2.5E+37
+  },
+  {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"50Td\"",
+    "CostValue": 5E+37
+  },
+  {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"100Td\"",
+    "CostValue": 1E+38
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"250Td\"",
+    "CostValue": 2.5E+38
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"500Td\"",
+    "CostValue": 5E+38
+  },
+  {
+    "Description": "Triple Business 8 profit",
+    "CostText": "\"1Qd\"",
+    "CostValue": 1E+39
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"5Qd\"",
+    "CostValue": 5E+39
+  },
+  {
+    "Description": "Triple Business 10 profit",
+    "CostText": "\"10Qd\"",
+    "CostValue": 1E+40
+  },
+  {
+    "Description": "Triple All Businesses profit",
+    "CostText": "\"25Qd\"",
+    "CostValue": 2.5E+40
+  },
+  {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"100Qd\"",
+    "CostValue": 1E+41
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"250Qd\"",
+    "CostValue": 2.5E+41
+  },
+  {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"500Qd\"",
+    "CostValue": 5E+41
+  },
+  {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"1Sd\"",
+    "CostValue": 1E+42
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"5Sd\"",
+    "CostValue": 5E+42
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"10Sd\"",
+    "CostValue": 1E+43
+  },
+  {
+    "Description": "Triple Business 8 profit",
+    "CostText": "\"25Sd\"",
+    "CostValue": 2.5E+43
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"50Sd\"",
+    "CostValue": 5E+43
+  },
+  {
+    "Description": "Triple Business 10 profit",
+    "CostText": "\"100Sd\"",
+    "CostValue": 1E+44
+  },
+  {
+    "Description": "Triple Business 1 profit",
+    "CostText": "\"500Sd\"",
+    "CostValue": 5E+44
+  },
+  {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"1St\"",
+    "CostValue": 1E+45
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"5St\"",
+    "CostValue": 5E+45
+  },
+  {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"10St\"",
+    "CostValue": 1E+46
+  },
+  {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"25St\"",
+    "CostValue": 2.5E+46
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"50St\"",
+    "CostValue": 5E+46
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"100St\"",
+    "CostValue": 1E+47
+  },
+  {
+    "Description": "Triple Business 8 profit",
+    "CostText": "\"250St\"",
+    "CostValue": 2.5E+47
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"500St\"",
+    "CostValue": 5E+47
+  },
+  {
+    "Description": "Triple All Businesses profit",
+    "CostText": "\"5Sp\"",
+    "CostValue": 5E+48
+  },
+  {
+    "Description": "Multiply Business 1 profit by 7",
+    "CostText": "\"10Sp\"",
+    "CostValue": 1E+49
+  },
+  {
+    "Description": "Multiply Business 2 profit by 7",
+    "CostText": "\"25Sp\"",
+    "CostValue": 2.5E+49
+  },
+  {
+    "Description": "Multiply Business 3 profit by 7",
+    "CostText": "\"50Sp\"",
+    "CostValue": 5E+49
+  },
+  {
+    "Description": "Multiply Business 4 profit by 7",
+    "CostText": "\"100Sp\"",
+    "CostValue": 1E+50
+  },
+  {
+    "Description": "Multiply Business 5 profit by 7",
+    "CostText": "\"250Sp\"",
+    "CostValue": 2.5E+50
+  },
+  {
+    "Description": "Multiply Business 6 profit by 7",
+    "CostText": "\"500Sp\"",
+    "CostValue": 5E+50
+  },
+  {
+    "Description": "Multiply Business 7 profit by 7",
+    "CostText": "\"1Np\"",
+    "CostValue": 1E+51
+  },
+  {
+    "Description": "Multiply Business 8 profit by 7",
+    "CostText": "\"5Np\"",
+    "CostValue": 5E+51
+  },
+  {
+    "Description": "Multiply Business 10 profit by 7",
+    "CostText": "\"25Np\"",
+    "CostValue": 2.5E+52
+  },
+  {
+    "Description": "Multiply All Businesses profit by 7",
+    "CostText": "\"50Np\"",
+    "CostValue": 5E+52
+  },
+  {
+    "Description": "Triple Business 1 profit",
+    "CostText": "\"100Np\"",
+    "CostValue": 1E+53
+  },
+  {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"250Np\"",
+    "CostValue": 2.5E+53
+  },
+  {
+    "Description": "Triple Business 3 profit",
+    "CostText": "\"500Np\"",
+    "CostValue": 5E+53
+  },
+  {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"1Dp\"",
+    "CostValue": 1E+54
+  },
+  {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"5Dp\"",
+    "CostValue": 5E+54
+  },
+  {
+    "Description": "Triple Business 6 profit",
+    "CostText": "\"10Dp\"",
+    "CostValue": 1E+55
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"25Dp\"",
+    "CostValue": 2.5E+55
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"100Dp\"",
+    "CostValue": 1E+56
+  },
+  {
+    "Description": "Triple Business 10 profit",
+    "CostText": "\"250Dp\"",
+    "CostValue": 2.5E+56
+  },
+  {
+    "Description": "Triple All Businesses profit",
+    "CostText": "\"500Dp\"",
+    "CostValue": 5E+56
+  }
+]
