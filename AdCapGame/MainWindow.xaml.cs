@@ -154,50 +154,6 @@ namespace AdCapGame
             UpdateUI(); // Continuously update UI elements based on the current game state.
         }
 
-        private void Upgrade_Click(object sender, RoutedEventArgs e)
-        {
-            // Cast the sender to a Button to access its properties
-            var button = sender as Button;
-            if (button == null) return; // If casting fails, exit the method
-
-            switch (button.Name)
-            {
-                case "B1UpgradeButton":
-                    business1.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B2UpgradeButton":
-                    business2.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B3UpgradeButton":
-                    business3.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B4UpgradeButton":
-                    business4.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B5UpgradeButton":
-                    business5.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B6UpgradeButton":
-                    business6.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B7UpgradeButton":
-                    business7.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B8UpgradeButton":
-                    business8.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B9UpgradeButton":
-                    business9.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                case "B10UpgradeButton":
-                    business10.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext());
-                    break;
-                default:
-                    MessageBox.Show("Unknown business upgrade attempted.");
-                    break;
-            }
-        }
-
         private void UpdateUI()
         {
             string CurrencyString = PlayerValues.Money.ToKMBTQ();
