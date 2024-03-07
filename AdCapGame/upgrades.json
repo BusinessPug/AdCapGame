@@ -20,6 +20,11 @@
     "CostValue": 5000000.0
   },
   {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"10M\"",
+    "CostValue": 10000000.0
+  },
+  {
     "Description": "Triple Business 6 profit",
     "CostText": "\"25M\"",
     "CostValue": 25000000.0
@@ -60,6 +65,16 @@
     "CostValue": 100000000000000.0
   },
   {
+    "Description": "Triple Business 4 profit",
+    "CostText": "\"500T\"",
+    "CostValue": 500000000000000.0
+  },
+  {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"1Qa\"",
+    "CostValue": 1E+15
+  },
+  {
     "Description": "Triple Business 6 profit",
     "CostText": "\"2Qa\"",
     "CostValue": 2E+15
@@ -73,6 +88,11 @@
     "Description": "Triple Business 8 profit",
     "CostText": "\"7Qa\"",
     "CostValue": 7E+15
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"10Qa\"",
+    "CostValue": 1E+16
   },
   {
     "Description": "Triple Business 10 profit",
@@ -95,6 +115,11 @@
     "CostValue": 2E+18
   },
   {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"5Qu\"",
+    "CostValue": 5E+18
+  },
+  {
     "Description": "Triple Business 3 profit",
     "CostText": "\"7Qu\"",
     "CostValue": 7E+18
@@ -113,6 +138,11 @@
     "Description": "Triple Business 6 profit",
     "CostText": "\"35Qu\"",
     "CostValue": 3.5E+19
+  },
+  {
+    "Description": "Triple Business 7 profit",
+    "CostText": "\"50Qu\"",
+    "CostValue": 5E+19
   },
   {
     "Description": "Triple Business 8 profit",
@@ -155,6 +185,11 @@
     "CostValue": 2E+23
   },
   {
+    "Description": "Triple Business 5 profit",
+    "CostText": "\"300Sx\"",
+    "CostValue": 3E+23
+  },
+  {
     "Description": "Triple Business 6 profit",
     "CostText": "\"400Sx\"",
     "CostValue": 4E+23
@@ -168,6 +203,11 @@
     "Description": "Triple Business 8 profit",
     "CostText": "\"600Sx\"",
     "CostValue": 6E+23
+  },
+  {
+    "Description": "Triple Business 9 profit",
+    "CostText": "\"700Sx\"",
+    "CostValue": 7E+23
   },
   {
     "Description": "Triple Business 10 profit",
@@ -188,6 +228,11 @@
     "Description": "Multiply Business 1 profit by 7",
     "CostText": "\"1Oc\"",
     "CostValue": 1E+27
+  },
+  {
+    "Description": "Multiply Business 2 profit by 7",
+    "CostText": "\"5Oc\"",
+    "CostValue": 5E+27
   },
   {
     "Description": "Multiply Business 3 profit by 7",
@@ -233,6 +278,11 @@
     "Description": "Multiply All Businesses profit by 7",
     "CostText": "\"1Td\"",
     "CostValue": 1E+36
+  },
+  {
+    "Description": "Triple Business 2 profit",
+    "CostText": "\"5Td\"",
+    "CostValue": 5E+36
   },
   {
     "Description": "Triple Business 3 profit",

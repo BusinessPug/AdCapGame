@@ -7,49 +7,52 @@ namespace AdCapGame
 {
     public class SaveLoad
     {
-        public static void SaveGame(List<Business> businesses)
+        public static void SaveGame(List<Business> businesses, string filePath = null)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            // If no filePath is provided, use SaveFileDialog to get user-selected path
+            if (string.IsNullOrEmpty(filePath))
             {
-                Filter = "AdCap (*.adcap)|*.adcap",
-                Title = "Save AdCap Game"
-            };
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "AdCap (*.adcap)|*.adcap",
+                    Title = "Save AdCap Game"
+                };
+                if (saveFileDialog.ShowDialog() != true) return; // User cancelled or closed the dialog
+                filePath = saveFileDialog.FileName;
+            }
 
             try
             {
-                if (saveFileDialog.ShowDialog() == true)
+                var businessAttributes = new List<dynamic>();
+
+
+                foreach (var business in businesses)
                 {
-                    var businessAttributes = new List<dynamic>();
-
-
-                    foreach (var business in businesses)
+                    businessAttributes.Add(new
                     {
-                        businessAttributes.Add(new
-                        {
-                            Time = business.Time,
-                            Revenue = business.Revenue,
-                            Multiplier = business.Multiplier,
-                            AmountOwned = business.AmountOwned,
-                            Cost = business.Cost,
-                            isGeneratingRevenue = business.isGeneratingRevenue
+                        Time = business.Time,
+                        Revenue = business.Revenue,
+                        Multiplier = business.Multiplier,
+                        AmountOwned = business.AmountOwned,
+                        Cost = business.Cost,
+                        isGeneratingRevenue = business.isGeneratingRevenue
 
-                        });
-                    }
-
-                    var SaveData = new
-                    {
-                        Money = PlayerValues.Money,
-                        MoneyPerSecond = PlayerValues.MoneyPerSecond, // Save this if relevant
-                        LifetimeEarnings = PlayerValues.LifetimeEarnings,
-                        PrestigeLevels = PlayerValues.PrestigeLevels,
-                        StartingLifetimeEarnings = PlayerValues.StartingLifetimeEarnings,
-                        PurchasedUpgrades = UpgradeMenu.purchasedUpgrades.ToList(),
-                        BusinessAttributes = businessAttributes,
-                    };
-
-                    string json = JsonConvert.SerializeObject(SaveData, Formatting.Indented);
-                    File.WriteAllText(saveFileDialog.FileName, json);
+                    });
                 }
+
+                var SaveData = new
+                {
+                    Money = PlayerValues.Money,
+                    MoneyPerSecond = PlayerValues.MoneyPerSecond, // Save this if relevant
+                    LifetimeEarnings = PlayerValues.LifetimeEarnings,
+                    PrestigeLevels = PlayerValues.PrestigeLevels,
+                    StartingLifetimeEarnings = PlayerValues.StartingLifetimeEarnings,
+                    PurchasedUpgrades = UpgradeMenu.purchasedUpgrades.ToList(),
+                    BusinessAttributes = businessAttributes,
+                };
+
+                string json = JsonConvert.SerializeObject(SaveData, Formatting.Indented);
+                File.WriteAllText(filePath, json);
             }
             catch (Exception ex)
             {
@@ -57,65 +60,70 @@ namespace AdCapGame
             }
         }
 
-        public static async void LoadGame(List<Business> businesses)
+        public static async void LoadGame(List<Business> businesses, string filePath = null)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            if (string.IsNullOrEmpty(filePath))
             {
-                Filter = "AdCap (*.adcap)|*.adcap",
-                Title = "Load AdCap Game"
-            };
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Filter = "AdCap (*.adcap)|*.adcap",
+                    Title = "Load AdCap Game"
+                };
 
+                if (openFileDialog.ShowDialog() != true)
+                {
+                    return; // User cancelled or closed the dialog, exit the method
+                }
+                filePath = openFileDialog.FileName;
+            }
             try
             {
-                if (openFileDialog.ShowDialog() == true)
+                // Directly use the filePath (either provided or chosen through the dialog)
+                string json = File.ReadAllText(filePath);
+                dynamic SaveData = JsonConvert.DeserializeObject(json);
+                
+                MainWindow.ResetAll();
+
+                await Task.Delay(250); // Simulate some loading delay
+
+                PlayerValues.Money = SaveData.Money;
+                PlayerValues.MoneyPerSecond = SaveData.MoneyPerSecond;
+                PlayerValues.LifetimeEarnings = SaveData.LifetimeEarnings;
+                PlayerValues.PrestigeLevels = SaveData.PrestigeLevels;
+                PlayerValues.StartingLifetimeEarnings = SaveData.StartingLifetimeEarnings;
+                UpgradeMenu.purchasedUpgrades = new HashSet<string>(SaveData.PurchasedUpgrades.ToObject<List<string>>());
+
+                var businessAttributes = SaveData.BusinessAttributes.ToObject<List<dynamic>>();
+
+                for (int i = 0; i < 10; i++)
                 {
-                    string json = File.ReadAllText(openFileDialog.FileName);
-                    dynamic SaveData = JsonConvert.DeserializeObject(json);
+                    var attributes = businessAttributes[i];
+                    var business = businesses[i];
 
-                    MainWindow.ResetAll();
+                    business.Time = (double)attributes.Time;
+                    business.Revenue = (double)attributes.Revenue;
+                    business.Multiplier = (double)attributes.Multiplier;
+                    business.AmountOwned = (int)attributes.AmountOwned;
+                    business.Cost = (double)attributes.Cost;
+                    business.isGeneratingRevenue = (bool)attributes.isGeneratingRevenue;
 
-                    await Task.Delay(250);
-
-                    PlayerValues.Money = SaveData.Money;
-                    PlayerValues.MoneyPerSecond = SaveData.MoneyPerSecond; // Assuming you want to load this
-                    PlayerValues.LifetimeEarnings = SaveData.LifetimeEarnings;
-                    PlayerValues.PrestigeLevels = SaveData.PrestigeLevels;
-                    PlayerValues.StartingLifetimeEarnings = SaveData.StartingLifetimeEarnings;
-                    UpgradeMenu.purchasedUpgrades = new HashSet<string>(SaveData.PurchasedUpgrades.ToObject<List<string>>());
-
-                    var businessAttributes = SaveData.BusinessAttributes.ToObject<List<dynamic>>();
-
-
-                    for (int i = 0; i < businesses.Count; i++)
+                    if ((bool)business.isGeneratingRevenue && business.AmountOwned > 0)
                     {
-                        var attributes = businessAttributes[i];
-                        var business = businesses[i];
-
-                        business.Time = (double)attributes.Time;
-                        business.Revenue = (double)attributes.Revenue;
-                        business.Multiplier = (double)attributes.Multiplier;
-                        business.AmountOwned = (int)attributes.AmountOwned;
-                        business.Cost = (double)attributes.Cost;
-                        business.isGeneratingRevenue = (bool)attributes.isGeneratingRevenue;
-                        if ((bool)business.isGeneratingRevenue && business.AmountOwned > 0)
+                        if (business.Time < 100)
                         {
-                            if (business.Time < 100)
-                            {
-                                await business.GenerateRevenuePerSecondAsync();
-                            }
-                            else
-                            {
-                                await business.GenerateRevenueWithProgressBarAsync();
-                            }
+                            business.GenerateRevenuePerSecondAsync(); // not awaited as that breaks the for loop. to be fixed later
+                        }
+                        else
+                        {
+                            business.GenerateRevenueWithProgressBarAsync(); // same as above
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex}");
+                MessageBox.Show($"Error loading game: {ex.Message}");
             }
         }
-
     }
 }

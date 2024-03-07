@@ -1,10 +1,9 @@
-﻿using System.Security.Cryptography;
+﻿using Newtonsoft.Json;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Newtonsoft.Json;
-using System.IO;
 
 namespace AdCapGame
 {
@@ -48,13 +47,28 @@ namespace AdCapGame
                 string json = File.ReadAllText(filePath);
                 var upgradeDefinitions = JsonConvert.DeserializeObject<List<UpgradeDefinition>>(json);
 
+                // Dictionary to map "Business x" to actual business names.
+                var businessNameMappings = new Dictionary<string, string>
+                {
+                    { "Business 1", "Peak Insights" },
+                    { "Business 2", "Data Heights" },
+                    { "Business 3", "River Metrics" },
+                    { "Business 4", "Tree Path Lab" },
+                    { "Business 5", "Moon Tech Co." },
+                    { "Business 6", "Sky Growth" },
+                    { "Business 7", "Hill Trends" },
+                    { "Business 8", "Star Analyis" },
+                    { "Business 9", "Cloud Market" },
+                    { "Business 10", "Wave Stats" }
+                };
+
                 upgrades = upgradeDefinitions?.Select(def => new Upgrade
                 {
                     Id = GenerateId(),
-                    Description = def.Description,
+                    Description = def.Description, // Keep the original description for logic
                     CostText = def.CostText,
                     CostValue = def.CostValue,
-                    Apply = manager => manager.ApplyUpgrade(def.Description) // Adjust this if necessary
+                    Apply = manager => manager.ApplyUpgrade(def.Description)
                 }).ToList();
 
                 foreach (var upgrade in upgrades)
@@ -66,7 +80,15 @@ namespace AdCapGame
                     grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
                     grid.Children.Add(CreateTextBlock(upgrade.Id, 0));
-                    grid.Children.Add(CreateTextBlock(upgrade.Description, 1));
+
+                    // Replace "Business x" in the description with the actual name, if it exists.
+                    string displayDescription = upgrade.Description;
+                    foreach (var mapping in businessNameMappings)
+                    {
+                        displayDescription = Regex.Replace(displayDescription, Regex.Escape(mapping.Key), mapping.Value);
+                    }
+                    grid.Children.Add(CreateTextBlock(displayDescription, 1)); // Use modified description
+
                     grid.Children.Add(CreateTextBlock(upgrade.CostText, 2));
                     grid.Children.Add(CreateUpgradeButton(upgrade, 3));
 
@@ -78,6 +100,7 @@ namespace AdCapGame
                 MessageBox.Show($"Failed to load upgrades: {ex.Message}");
             }
         }
+
 
         private string GenerateId()
         {

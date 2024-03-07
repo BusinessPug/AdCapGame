@@ -2,7 +2,7 @@
 
 public class PrestigeManager
 {
-    public const double DifficultyFactor = 400e11; //
+    public const double DifficultyFactor = 400e12; //
 
     public static double CalculateNewPrestigeLevels()
     {
@@ -21,6 +21,8 @@ public class PrestigeManager
         PlayerValues.ResetForPrestige();
         PlayerValues.StartingLifetimeEarnings = PlayerValues.LifetimeEarnings;
         PlayerValues.PrestigeLevels += newPrestigeLevels;
+        // clear the HashSet of purchased upgrades
+        UpgradeMenu.purchasedUpgrades.Clear();
         OnResetGame?.Invoke();
     }
 }

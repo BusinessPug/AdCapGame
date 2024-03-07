@@ -1,8 +1,11 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Timer = System.Timers.Timer;
 
 namespace AdCapGame
 {
@@ -21,6 +24,9 @@ namespace AdCapGame
         private static List<Business> businesses = new List<Business>();
         private List<PopupWindow> openPopups = new List<PopupWindow>();
         private DispatcherTimer uiUpdateTimer;
+        private DispatcherTimer upgradeTimer = new DispatcherTimer();
+        private string currentButtonName = string.Empty;
+        private Dictionary<string, Action> buttonToPurchaseActionMap;
         public List<Business> GetAllBusinesses() => new List<Business> { business1, business2, business3, business4, business5, business6, business7, business8, business9, business10 };
 
         public MainWindow()
@@ -28,12 +34,32 @@ namespace AdCapGame
             InitializeComponent();
             PlayerValues.Money = 5;
             InitializeGame();
+
+            buttonToPurchaseActionMap = new Dictionary<string, Action>
+            {
+                { "B1UpgradeButton", () => business1.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B2UpgradeButton", () => business2.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B3UpgradeButton", () => business3.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B4UpgradeButton", () => business4.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B5UpgradeButton", () => business5.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B6UpgradeButton", () => business6.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B7UpgradeButton", () => business7.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B8UpgradeButton", () => business8.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B9UpgradeButton", () => business9.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B10UpgradeButton", () => business10.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+            };
+
+            // Initialize the timer
+            upgradeTimer = new DispatcherTimer();
+            upgradeTimer.Interval = TimeSpan.FromMilliseconds(50); // Adjust interval as needed
+            upgradeTimer.Tick += UpgradeTimer_Tick;
+
             PrestigeManager.OnResetGame += ResetAndApplyPrestige;
+            SetupAutoSaveTimer();
             this.Closing += MainWindow_Closing;
         }
 
-
-        private void InitializeGame()
+        private async void InitializeGame()
         {
             business1 = new Business1(this);
             business2 = new Business2(this);
@@ -56,11 +82,62 @@ namespace AdCapGame
             businesses.Add(business8);
             businesses.Add(business9);
             businesses.Add(business10);
-            SetupUiUpdateTimer();
+
             UpdateUI(); // Initial UI update to reflect starting state.
+            SetupUiUpdateTimer();
+            await CheckForAutoSave();
+        }
+
+        private void GenericButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Button button && buttonToPurchaseActionMap.ContainsKey(button.Name))
+            {
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                {
+                    // Shift key is held down, start auto-upgrade
+                    currentButtonName = button.Name;
+                    upgradeTimer.Start();
+                }
+                else
+                {
+                    // No Shift key, perform a single upgrade
+                    buttonToPurchaseActionMap[button.Name]?.Invoke();
+                }
+            }
         }
 
 
+        private void GenericButton_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            // Stop the auto-upgrade timer if it was started
+            upgradeTimer.Stop();
+            currentButtonName = string.Empty; // Reset the button name
+        }
+
+        private void UpgradeTimer_Tick(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (!string.IsNullOrEmpty(currentButtonName) && buttonToPurchaseActionMap.TryGetValue(currentButtonName, out var action))
+                {
+                    action?.Invoke();
+                }
+            });
+        }
+
+        private Task CheckForAutoSave()
+        {
+            string autoSavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AdCapAutosave.adcap");
+            if (File.Exists(autoSavePath))
+            {
+                var result = MessageBox.Show("An autosave file was found. Do you want to load it?", "Autosave found", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    SaveLoad.LoadGame(businesses, autoSavePath);
+                }
+            }
+            return Task.CompletedTask;
+        }
 
         private void SetupUiUpdateTimer()
         {
@@ -385,6 +462,22 @@ namespace AdCapGame
                 popup.Close();
             }
             openPopups.Clear();
+        }
+
+        private void SetupAutoSaveTimer()
+        {
+            Timer autoSaveTimer = new Timer(300000); // 300,000 ms = 5 minutes
+            autoSaveTimer.Elapsed += (sender, e) =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    // Define the autosave file path. You could also use a dedicated autosave directory.
+                    string autoSavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AdCapAutosave.adcap");
+                    SaveLoad.SaveGame(GetAllBusinesses(), autoSavePath);
+                });
+            };
+            autoSaveTimer.AutoReset = true;
+            autoSaveTimer.Enabled = true;
         }
     }
 }

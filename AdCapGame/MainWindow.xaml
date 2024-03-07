@@ -73,8 +73,6 @@
 
             <Grid DockPanel.Dock="Top">
                 <!-- Header -->
-                <TextBlock Text="Your Businesses" FontWeight="Bold" FontSize="20"
-                           HorizontalAlignment="Center" Margin="0,35,0,10" VerticalAlignment="Center" Style="{x:Null}" Foreground="White"/>
                 <TextBlock Text="Total Revenue: $5" FontWeight="Bold" FontSize="20"
                            HorizontalAlignment="Center" Margin="0,10,0,20" VerticalAlignment="Center" Name="CurrencyLabel" Style="{x:Null}" Foreground="White"/>
             </Grid>
@@ -114,74 +112,94 @@
                 <!-- Business Rows -->
 
                 <!-- Business 1 -->
-                <TextBlock Grid.Row="1" Text="Business 1" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Owned: 1" VerticalAlignment="Center" Name="B1OwnedText"/>
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="$1" VerticalAlignment="Center" Name="B1Rev"/>
-                <ProgressBar Grid.Row="1" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B1Prog"/>
-                <Button Grid.Row="1" Grid.Column="4" Content="$4" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B1UpgradeButton"/>
+                <TextBlock Grid.Row="1" Text="Peak Insights" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Name="B1OwnedText"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Name="B1Rev"/>
+                <ProgressBar Grid.Row="1" Grid.Column="3" Maximum="100" Height="20" Name="B1Prog"/>
+                <Button Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" Width="100" 
+                        Background="Red" Click="Upgrade_Click" Name="B1UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 2 -->
-                <TextBlock Grid.Row="2" Text="Business 2" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B2OwnedText"/>
-                <TextBlock Grid.Row="2" Grid.Column="2" Text="$60" VerticalAlignment="Center" Name="B2Rev"/>
-                <ProgressBar Grid.Row="2" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B2Prog"/>
-                <Button Grid.Row="2" Grid.Column="4" Content="$60" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B2UpgradeButton"/>
+                <TextBlock Grid.Row="2" Text="Data Heights" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Name="B2OwnedText"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Name="B2Rev"/>
+                <ProgressBar Grid.Row="2" Grid.Column="3" Maximum="100" Height="20" Name="B2Prog"/>
+                <Button Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" Width="100" 
+                        Background="Red" Click="Upgrade_Click" Name="B2UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 3 -->
-                <TextBlock Grid.Row="3" Text="Business 3" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B3OwnedText"/>
-                <TextBlock Grid.Row="3" Grid.Column="2" Text="$540" VerticalAlignment="Center" Name="B3Rev"/>
-                <ProgressBar Grid.Row="3" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B3Prog"/>
-                <Button Grid.Row="3" Grid.Column="4" Content="$720" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B3UpgradeButton"/>
+                <TextBlock Grid.Row="3" Text="River Metrics" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Name="B3OwnedText"/>
+                <TextBlock Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Name="B3Rev"/>
+                <ProgressBar Grid.Row="3" Grid.Column="3" Maximum="100" Height="20" Name="B3Prog"/>
+                <Button Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" Width="100"
+                        Background="Red" Click="Upgrade_Click" Name="B3UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 4-->
-                <TextBlock Grid.Row="4" Text="Business 4" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B4OwnedText"/>
-                <TextBlock Grid.Row="4" Grid.Column="2" Text="$4320" VerticalAlignment="Center" Name="B4Rev"/>
-                <ProgressBar Grid.Row="4" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B4Prog"/>
-                <Button Grid.Row="4" Grid.Column="4" Content="$8640" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B4UpgradeButton"/>
+                <TextBlock Grid.Row="4" Text="Tree Path Lab" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Name="B4OwnedText"/>
+                <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Name="B4Rev"/>
+                <ProgressBar Grid.Row="4" Grid.Column="3" Maximum="100" Height="20" Name="B4Prog"/>
+                <Button Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" Width="100" 
+                        Background="Red" Click="Upgrade_Click" Name="B4UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 5 -->
-                <TextBlock Grid.Row="5" Text="Business 5" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="5" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B5OwnedText"/>
-                <TextBlock Grid.Row="5" Grid.Column="2" Text="$51840" VerticalAlignment="Center" Name="B5Rev"/>
-                <ProgressBar Grid.Row="5" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B5Prog"/>
-                <Button Grid.Row="5" Grid.Column="4" Content="$103680" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B5UpgradeButton"/>
+                <TextBlock Grid.Row="5" Text="Moon Tech Co." VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Name="B5OwnedText"/>
+                <TextBlock Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Name="B5Rev"/>
+                <ProgressBar Grid.Row="5" Grid.Column="3" Maximum="100" Height="20" Name="B5Prog"/>
+                <Button Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" Width="100" 
+                        Background="Red" Click="Upgrade_Click" Name="B5UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 6 -->
-                <TextBlock Grid.Row="6" Text="Business 6" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="6" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B6OwnedText"/>
-                <TextBlock Grid.Row="6" Grid.Column="2" Text="$622K" VerticalAlignment="Center" Name="B6Rev"/>
-                <ProgressBar Grid.Row="6" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B6Prog"/>
-                <Button Grid.Row="6" Grid.Column="4" Content="$1.2M" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B6UpgradeButton"/>
+                <TextBlock Grid.Row="6" Text="Sky Growth" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Name="B6OwnedText"/>
+                <TextBlock Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Name="B6Rev"/>
+                <ProgressBar Grid.Row="6" Grid.Column="3" Maximum="100" Height="20" Name="B6Prog"/>
+                <Button Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center" Width="100" 
+                        Background="Red" Click="Upgrade_Click" Name="B6UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 7 -->
-                <TextBlock Grid.Row="7" Text="Business 7" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="7" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B7OwnedText"/>
-                <TextBlock Grid.Row="7" Grid.Column="2" Text="$7.5M" VerticalAlignment="Center" Name="B7Rev"/>
-                <ProgressBar Grid.Row="7" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B7Prog"/>
-                <Button Grid.Row="7" Grid.Column="4" Content="15M" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B7UpgradeButton"/>
+                <TextBlock Grid.Row="7" Text="Hill Trends" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Name="B7OwnedText"/>
+                <TextBlock Grid.Row="7" Grid.Column="2"  VerticalAlignment="Center" Name="B7Rev"/>
+                <ProgressBar Grid.Row="7" Grid.Column="3" Maximum="100" Height="20" Name="B7Prog"/>
+                <Button Grid.Row="7" Grid.Column="4" HorizontalAlignment="Center" Width="100"
+                        Background="Red" Click="Upgrade_Click" Name="B7UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 8 -->
-                <TextBlock Grid.Row="8" Text="Business 8" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="8" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B8OwnedText"/>
-                <TextBlock Grid.Row="8" Grid.Column="2" Text="$90M" VerticalAlignment="Center" Name="B8Rev"/>
-                <ProgressBar Grid.Row="8" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B8Prog"/>
-                <Button Grid.Row="8" Grid.Column="4" Content="179M" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B8UpgradeButton"/>
+                <TextBlock Grid.Row="8" Text="Star Analysis" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Name="B8OwnedText"/>
+                <TextBlock Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" Name="B8Rev"/>
+                <ProgressBar Grid.Row="8" Grid.Column="3" Maximum="100" Height="20" Name="B8Prog"/>
+                <Button Grid.Row="8" Grid.Column="4" HorizontalAlignment="Center" Width="100" 
+                        Background="Red" Click="Upgrade_Click" Name="B8UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 9 -->
-                <TextBlock Grid.Row="9" Text="Business 9" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="9" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B9OwnedText"/>
-                <TextBlock Grid.Row="9" Grid.Column="2" Text="$1B" VerticalAlignment="Center" Name="B9Rev"/>
-                <ProgressBar Grid.Row="9" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B9Prog"/>
-                <Button Grid.Row="9" Grid.Column="4" Content="$2.1B" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B9UpgradeButton"/>
+                <TextBlock Grid.Row="9" Text="Cloud Market" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Name="B9OwnedText"/>
+                <TextBlock Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" Name="B9Rev"/>
+                <ProgressBar Grid.Row="9" Grid.Column="3" Maximum="100" Height="20" Name="B9Prog"/>
+                <Button Grid.Row="9" Grid.Column="4" HorizontalAlignment="Center" Width="100"
+                        Background="Red" Click="Upgrade_Click" Name="B9UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
 
                 <!-- Business 10 -->
-                <TextBlock Grid.Row="10" Text="Business 10" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="10" Grid.Column="1" Text="Owned: 0" VerticalAlignment="Center" Name="B10OwnedText"/>
-                <TextBlock Grid.Row="10" Grid.Column="2" Text="$30B" VerticalAlignment="Center" Name="B10Rev"/>
-                <ProgressBar Grid.Row="10" Grid.Column="3" Value="0" Maximum="100" Height="20" Name="B10Prog"/>
-                <Button Grid.Row="10" Grid.Column="4" Content="$25.7B" HorizontalAlignment="Center" Width="100" Background="Red" Click="Upgrade_Click" Name="B10UpgradeButton"/>
+                <TextBlock Grid.Row="10" Text="Wave Stats" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Name="B10OwnedText"/>
+                <TextBlock Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" Name="B10Rev"/>
+                <ProgressBar Grid.Row="10" Grid.Column="3" Maximum="100" Height="20" Name="B10Prog"/>
+                <Button Grid.Row="10" Grid.Column="4" HorizontalAlignment="Center" Width="100"
+                        Background="Red" Click="Upgrade_Click" Name="B10UpgradeButton" PreviewMouseDown="GenericButton_PreviewMouseDown"
+                        PreviewMouseUp="GenericButton_PreviewMouseUp"/>
             </Grid>
         </DockPanel>
     </Viewbox>
