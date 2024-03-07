@@ -345,6 +345,17 @@ namespace AdCapGame
             BackgroundImage.Opacity = 1;
         }
 
+        private void Unlocks_Click(object sender, RoutedEventArgs e)
+        {
+            var businessUnlocks = BusinessUnlocks.GetInstance();
+            businessUnlocks.Owner = this; // Set the owner to MainWindow
+            ViewboxMain.Opacity = 0.5; // Show the overlay
+            BackgroundImage.Opacity = 0.5;
+            businessUnlocks.ShowDialog();
+            ViewboxMain.Opacity = 1;
+            BackgroundImage.Opacity = 1;
+        }
+
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             SaveLoad.SaveGame(GetAllBusinesses());
@@ -435,5 +446,6 @@ namespace AdCapGame
             autoSaveTimer.AutoReset = true;
             autoSaveTimer.Enabled = true;
         }
+
     }
 }

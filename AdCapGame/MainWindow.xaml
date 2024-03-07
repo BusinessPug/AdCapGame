@@ -69,6 +69,7 @@
                 <Button Content="Load" Background="Black" Foreground="White" Click="Load_Click"/>
                 <Button Content="Upgrade Menu" Background="Black" Foreground="White" HorizontalAlignment="Left" Click="UpgradeMenu_Click"/>
                 <Button Content="Prestige Menu" Background="Black" Foreground="White" HorizontalAlignment="Left" Click="PrestigeMenu_Click"/>
+                <Button Content="Unlocks" Background="Black" Foreground="White" HorizontalAlignment="Left" Click="Unlocks_Click"/>
             </Menu>
 
             <Grid DockPanel.Dock="Top">

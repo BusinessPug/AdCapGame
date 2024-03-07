@@ -1,0 +1,394 @@
+[
+  {
+    "UnlockAmount": 25,
+    "Description": "Time Halved!"
+  },
+  {
+    "UnlockAmount": 50,
+    "Description": "Time Halved!"
+  },
+  {
+    "UnlockAmount": 100,
+    "Description": "Time Halved!"
+  },
+  {
+    "UnlockAmount": 125,
+    "Description": "Peak Insights 2x profit!"
+  },
+  {
+    "UnlockAmount": 150,
+    "Description": "River Metrics 2x profit!"
+  },
+  {
+    "UnlockAmount": 175,
+    "Description": "Tree Path Lab 2x profit!"
+  },
+  {
+    "UnlockAmount": 200,
+    "Description": "Time Halved!"
+  },
+  {
+    "UnlockAmount": 225,
+    "Description": "Peak Insights 3x profit!"
+  },
+  {
+    "UnlockAmount": 250,
+    "Description": "River Metrics 3x profit!"
+  },
+  {
+    "UnlockAmount": 275,
+    "Description": "Tree Path Lab 3x profit!"
+  },
+  {
+    "UnlockAmount": 300,
+    "Description": "Time Halved!"
+  },
+  {
+    "UnlockAmount": 325,
+    "Description": "Tree Path Lab 4x profit!"
+  },
+  {
+    "UnlockAmount": 350,
+    "Description": "Moon Tech Co. 4x profit!"
+  },
+  {
+    "UnlockAmount": 375,
+    "Description": "Peak Insight 4x profit!"
+  },
+  {
+    "UnlockAmount": 400,
+    "Description": "Time Halved!"
+  },
+  {
+    "UnlockAmount": 425,
+    "Description": "River Metrics 4x profit!"
+  },
+  {
+    "UnlockAmount": 450,
+    "Description": "Tree Path Lab 4x profit!"
+  },
+  {
+    "UnlockAmount": 475,
+    "Description": "Moon Tech Co. 4x profit!"
+  },
+  {
+    "UnlockAmount": 500,
+    "Description": "Sky Growth 11x profit!"
+  },
+  {
+    "UnlockAmount": 525,
+    "Description": "Peak Insight 5x profit!"
+  },
+  {
+    "UnlockAmount": 550,
+    "Description": "River Metrics 5x profit!"
+  },
+  {
+    "UnlockAmount": 575,
+    "Description": "Tree Path Lab 5x profit!"
+  },
+  {
+    "UnlockAmount": 600,
+    "Description": "Hill Trends 11x profit!"
+  },
+  {
+    "UnlockAmount": 625,
+    "Description": "Moon Tech Co. 5x profit!"
+  },
+  {
+    "UnlockAmount": 650,
+    "Description": "Peak Insight 6x profit!"
+  },
+  {
+    "UnlockAmount": 675,
+    "Description": "River Metrics 6x profit!"
+  },
+  {
+    "UnlockAmount": 700,
+    "Description": "Star Analysis 11x profit!"
+  },
+  {
+    "UnlockAmount": 725,
+    "Description": "Tree Path Lab 6x profit!"
+  },
+  {
+    "UnlockAmount": 750,
+    "Description": "Moon Tech Co. 6x profit!"
+  },
+  {
+    "UnlockAmount": 775,
+    "Description": "Peak Insight 7x profit!"
+  },
+  {
+    "UnlockAmount": 800,
+    "Description": "Cloud Market 11x profit!"
+  },
+  {
+    "UnlockAmount": 825,
+    "Description": "River Metrics 7x profit!"
+  },
+  {
+    "UnlockAmount": 850,
+    "Description": "Tree Path Lab 7x profit!"
+  },
+  {
+    "UnlockAmount": 875,
+    "Description": "Moon Tech Co. 7x profit!"
+  },
+  {
+    "UnlockAmount": 900,
+    "Description": "Wave Stats 11x profit!"
+  },
+  {
+    "UnlockAmount": 925,
+    "Description": "Sky Growth 7x profit!"
+  },
+  {
+    "UnlockAmount": 950,
+    "Description": "Hill Trends 7x profit!"
+  },
+  {
+    "UnlockAmount": 975,
+    "Description": "Star Analysis 7x profit!"
+  },
+  {
+    "UnlockAmount": 1000,
+    "Description": "Data Heights 7777x profit!"
+  },
+  {
+    "UnlockAmount": 1025,
+    "Description": "Cloud Market 7x profit!"
+  },
+  {
+    "UnlockAmount": 1050,
+    "Description": "Wave Stats 7x profit!"
+  },
+  {
+    "UnlockAmount": 1075,
+    "Description": "River Metrics 8x profit!"
+  },
+  {
+    "UnlockAmount": 1100,
+    "Description": "Tree Path Lab 8x profit!"
+  },
+  {
+    "UnlockAmount": 1125,
+    "Description": "Moon Tech Co. 8x profit!"
+  },
+  {
+    "UnlockAmount": 1150,
+    "Description": "Sky Growth 8x profit!"
+  },
+  {
+    "UnlockAmount": 1175,
+    "Description": "Hill Trends 8x profit!"
+  },
+  {
+    "UnlockAmount": 1200,
+    "Description": "Star Analysis 8x profit!"
+  },
+  {
+    "UnlockAmount": 1225,
+    "Description": "Cloud Market 8x profit!"
+  },
+  {
+    "UnlockAmount": 1250,
+    "Description": "Wave Stats 8x profit!"
+  },
+  {
+    "UnlockAmount": 1300,
+    "Description": "Data Heights 7777x profit!"
+  },
+  {
+    "UnlockAmount": 1350,
+    "Description": "Peak Insight 9x profit!"
+  },
+  {
+    "UnlockAmount": 1400,
+    "Description": "River Metrics 9x profit!"
+  },
+  {
+    "UnlockAmount": 1450,
+    "Description": "Tree Path Lab 9x profit!"
+  },
+  {
+    "UnlockAmount": 1500,
+    "Description": "Moon Tech Co. 9x profit!"
+  },
+  {
+    "UnlockAmount": 1550,
+    "Description": "Sky Growth 9x profit!"
+  },
+  {
+    "UnlockAmount": 1600,
+    "Description": "Hill Trends 9x profit!"
+  },
+  {
+    "UnlockAmount": 1650,
+    "Description": "Star Analysis 9x profit!"
+  },
+  {
+    "UnlockAmount": 1700,
+    "Description": "Cloud Market 9x profit!"
+  },
+  {
+    "UnlockAmount": 1750,
+    "Description": "Wave Stats 9x profit!"
+  },
+  {
+    "UnlockAmount": 1800,
+    "Description": "Sky Growth 10x profit!"
+  },
+  {
+    "UnlockAmount": 1850,
+    "Description": "Hill Trends 10x profit!"
+  },
+  {
+    "UnlockAmount": 1900,
+    "Description": "Star Analysis 10x profit!"
+  },
+  {
+    "UnlockAmount": 1950,
+    "Description": "Cloud Market 10x profit!"
+  },
+  {
+    "UnlockAmount": 2000,
+    "Description": "Data Heights Profit Speed Doubled"
+  },
+  {
+    "UnlockAmount": 2100,
+    "Description": "River Metrics 15x profit!"
+  },
+  {
+    "UnlockAmount": 2200,
+    "Description": "Tree Path Lab 15x profit!"
+  },
+  {
+    "UnlockAmount": 2300,
+    "Description": "Moon Tech Co. 15x profit!"
+  },
+  {
+    "UnlockAmount": 2400,
+    "Description": "Sky Growth 15x profit!"
+  },
+  {
+    "UnlockAmount": 2500,
+    "Description": "Data Heights Profit ×777"
+  },
+  {
+    "UnlockAmount": 2600,
+    "Description": "Star Analysis 15x profit!"
+  },
+  {
+    "UnlockAmount": 2700,
+    "Description": "Cloud Market 15x profit!"
+  },
+  {
+    "UnlockAmount": 2800,
+    "Description": "Wave Stats 15x profit!"
+  },
+  {
+    "UnlockAmount": 2900,
+    "Description": "Peak Insight 15x profit!"
+  },
+  {
+    "UnlockAmount": 3000,
+    "Description": "Data Heights Profit ×777"
+  },
+  {
+    "UnlockAmount": 3100,
+    "Description": "River Metrics 20x profit!"
+  },
+  {
+    "UnlockAmount": 3200,
+    "Description": "Hill Trends 20x profit!"
+  },
+  {
+    "UnlockAmount": 3300,
+    "Description": "Cloud Market 20x profit!"
+  },
+  {
+    "UnlockAmount": 3400,
+    "Description": "Wave Stats 20x profit!"
+  },
+  {
+    "UnlockAmount": 3500,
+    "Description": "Data Heights Profit ×777"
+  },
+  {
+    "UnlockAmount": 3600,
+    "Description": "Hill Trends 25x profit!"
+  },
+  {
+    "UnlockAmount": 3700,
+    "Description": "Star Analysis 25x profit!"
+  },
+  {
+    "UnlockAmount": 3800,
+    "Description": "Cloud Market 25x profit!"
+  },
+  {
+    "UnlockAmount": 3900,
+    "Description": "Wave Stats 25x profit!"
+  },
+  {
+    "UnlockAmount": 4000,
+    "Description": "Data Heights Profit ×30"
+  },
+  {
+    "UnlockAmount": 4100,
+    "Description": "Peak Insight 30x profit!"
+  },
+  {
+    "UnlockAmount": 4200,
+    "Description": "River Metrics 30x profit!"
+  },
+  {
+    "UnlockAmount": 4300,
+    "Description": "Tree Path Lab 30x profit!"
+  },
+  {
+    "UnlockAmount": 4400,
+    "Description": "Moon Tech Co. 30x profit!"
+  },
+  {
+    "UnlockAmount": 4500,
+    "Description": "Sky Growth 30x profit!"
+  },
+  {
+    "UnlockAmount": 4600,
+    "Description": "Hill Trends 30x profit!"
+  },
+  {
+    "UnlockAmount": 4700,
+    "Description": "Star Analysis 30x profit!"
+  },
+  {
+    "UnlockAmount": 4800,
+    "Description": "Cloud Market 30x profit!"
+  },
+  {
+    "UnlockAmount": 4900,
+    "Description": "Wave Stats Profit ×30"
+  },
+  {
+    "UnlockAmount": 5000,
+    "Description": "Data Heights Profit ×50"
+  },
+  {
+    "UnlockAmount": 5100,
+    "Description": "Data Heights Profit ×50"
+  },
+  {
+    "UnlockAmount": 5200,
+    "Description": "Data Heights Profit ×50"
+  },
+  {
+    "UnlockAmount": 5300,
+    "Description": "Data Heights Profit ×50"
+  },
+  {
+    "UnlockAmount": 5400,
+    "Description": "Data Heights Profit ×50"
+  }
+]

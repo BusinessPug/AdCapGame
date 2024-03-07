@@ -9,12 +9,70 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\AdCapIcon.ico" />
+    <None Remove="Assets\All-Businesses.png" />
+    <None Remove="Assets\BusinessUnlocks.jpg" />
+    <None Remove="Assets\Cloud-Market.png" />
+    <None Remove="Assets\Data-Heights.png" />
+    <None Remove="Assets\Hill-Trends.png" />
     <None Remove="Assets\Main.jpg" />
+    <None Remove="Assets\Moon-Tech-Co.png" />
+    <None Remove="Assets\Peak-Insights.png" />
+    <None Remove="Assets\PrestigeMenu.jpg" />
+    <None Remove="Assets\River-Metrics.png" />
+    <None Remove="Assets\Sky-Growth.png" />
+    <None Remove="Assets\Star-Analysis.png" />
+    <None Remove="Assets\Tree-Path-Lab.png" />
     <None Remove="Assets\UpMenu.jpg" />
+    <None Remove="Assets\Wave-Stats.png" />
+    <None Remove="Business-Unlocks\All-Businesses-Unlocks.json" />
+    <None Remove="Business-Unlocks\Cloud-Market-Unlocks.json" />
+    <None Remove="Business-Unlocks\Data-Heights-Unlocks.json" />
+    <None Remove="Business-Unlocks\Hill-Trends-Unlocks.json" />
+    <None Remove="Business-Unlocks\Moon-Tech-Co-Unlocks.json" />
+    <None Remove="Business-Unlocks\Peak-Insights-Unlocks.json" />
+    <None Remove="Business-Unlocks\River-Metrics-Unlocks.json" />
+    <None Remove="Business-Unlocks\Sky-Growth-Unlocks.json" />
+    <None Remove="Business-Unlocks\Star-Analysis-Unlocks.json" />
+    <None Remove="Business-Unlocks\Tree-Path-Lab-Unlocks.json" />
+    <None Remove="Business-Unlocks\Wave-Stats-Unlocks.json" />
     <None Remove="Upgrades.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Business-Unlocks\All-Businesses-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Cloud-Market-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Data-Heights-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Hill-Trends-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Moon-Tech-Co-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Peak-Insights-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\River-Metrics-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Sky-Growth-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Star-Analysis-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Tree-Path-Lab-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business-Unlocks\Wave-Stats-Unlocks.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="upgrades.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -26,8 +84,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\AdCapIcon.ico" />
+    <Resource Include="Assets\All-Businesses.png" />
+    <Resource Include="Assets\BusinessUnlocks.jpg" />
+    <Resource Include="Assets\Cloud-Market.png" />
+    <Resource Include="Assets\Data-Heights.png" />
+    <Resource Include="Assets\Hill-Trends.png" />
     <Resource Include="Assets\Main.jpg" />
+    <Resource Include="Assets\Moon-Tech-Co.png" />
+    <Resource Include="Assets\Peak-Insights.png" />
+    <Resource Include="Assets\PrestigeMenu.jpg" />
+    <Resource Include="Assets\River-Metrics.png" />
+    <Resource Include="Assets\Sky-Growth.png" />
+    <Resource Include="Assets\Star-Analysis.png" />
+    <Resource Include="Assets\Tree-Path-Lab.png" />
     <Resource Include="Assets\UpMenu.jpg" />
+    <Resource Include="Assets\Wave-Stats.png" />
   </ItemGroup>
 
   <ItemGroup>
