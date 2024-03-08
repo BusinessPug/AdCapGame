@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Timer = System.Timers.Timer;
 
@@ -105,7 +106,6 @@ namespace AdCapGame
                 }
             }
         }
-
 
         private void GenericButton_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -293,7 +293,6 @@ namespace AdCapGame
             }
         }
 
-
         public void ApplyMultiplier(string name, double multiplier)
         {
             switch (name)
@@ -446,6 +445,5 @@ namespace AdCapGame
             autoSaveTimer.AutoReset = true;
             autoSaveTimer.Enabled = true;
         }
-
     }
 }

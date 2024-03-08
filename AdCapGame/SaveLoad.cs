@@ -43,11 +43,11 @@ namespace AdCapGame
                 var SaveData = new
                 {
                     Money = PlayerValues.Money,
-                    MoneyPerSecond = PlayerValues.MoneyPerSecond, // Save this if relevant
                     LifetimeEarnings = PlayerValues.LifetimeEarnings,
                     PrestigeLevels = PlayerValues.PrestigeLevels,
                     StartingLifetimeEarnings = PlayerValues.StartingLifetimeEarnings,
                     PurchasedUpgrades = UpgradeMenu.purchasedUpgrades.ToList(),
+                    UnlockedItems = BusinessUnlocks.unlockedItems.ToList(),
                     BusinessAttributes = businessAttributes,
                 };
 
@@ -84,14 +84,14 @@ namespace AdCapGame
                 
                 MainWindow.ResetAll();
 
-                await Task.Delay(250); // Simulate some loading delay
+                await Task.Delay(250); // Simulate some loading delay. really just a buffer to make sure the player doesn't recieve revenue they shouldn't
 
                 PlayerValues.Money = SaveData.Money;
-                PlayerValues.MoneyPerSecond = SaveData.MoneyPerSecond;
                 PlayerValues.LifetimeEarnings = SaveData.LifetimeEarnings;
                 PlayerValues.PrestigeLevels = SaveData.PrestigeLevels;
                 PlayerValues.StartingLifetimeEarnings = SaveData.StartingLifetimeEarnings;
                 UpgradeMenu.purchasedUpgrades = new HashSet<string>(SaveData.PurchasedUpgrades.ToObject<List<string>>());
+                BusinessUnlocks.unlockedItems = new HashSet<string>(SaveData.UnlockedItems.ToObject<List<string>>());
 
                 var businessAttributes = SaveData.BusinessAttributes.ToObject<List<dynamic>>();
 

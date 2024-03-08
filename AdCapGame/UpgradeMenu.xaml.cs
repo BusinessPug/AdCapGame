@@ -37,7 +37,9 @@ namespace AdCapGame
             upgradeIdCounter = 1;
             businessManager = manager;
             PopulateUpgrades();
+            StartUpgradeChecks();
         }
+
 
         private void PopulateUpgrades()
         {
@@ -137,6 +139,7 @@ namespace AdCapGame
                 Background = isPurchased ? Brushes.Gray : (canAfford ? Brushes.Green : Brushes.Red),
                 IsEnabled = !isPurchased && canAfford,
                 Style = (Style)FindResource("ButtonStyle"),
+                Name = upgrade.Id, // Set the name to the upgrade ID
                 Tag = upgrade // Store the entire Upgrade object
             };
             Grid.SetColumn(button, column);
@@ -159,6 +162,45 @@ namespace AdCapGame
                 button.IsEnabled = false;
                 // Optionally, refresh UI here if needed to reflect new balance and upgrade status.
             }
+        }
+
+        private async void StartUpgradeChecks()
+        {
+            while (true) // It's better to use true for an infinite loop
+            {
+                foreach (var upgrade in upgrades)
+                {
+                    // Attempt to find the button by its name, which is set to the upgrade's ID
+                    var button = FindButtonByName(UpgradeListPanel, upgrade.Id);
+                    if (button != null)
+                    {
+                        var isPurchased = purchasedUpgrades.Contains(upgrade.Id);
+                        var canAfford = PlayerValues.Money >= upgrade.CostValue;
+                        button.Content = isPurchased ? "Purchased" : "Upgrade";
+                        button.Background = isPurchased ? Brushes.Gray : (canAfford ? Brushes.Green : Brushes.Red);
+                        button.IsEnabled = !isPurchased && canAfford;
+                    }
+                }
+                await Task.Delay(200); // Wait a bit before checking again
+            }
+        }
+
+        private Button FindButtonByName(Panel panel, string name)
+        {
+            foreach (var child in panel.Children)
+            {
+                if (child is Grid grid)
+                {
+                    foreach (var element in grid.Children)
+                    {
+                        if (element is Button button && button.Name == name)
+                        {
+                            return button;
+                        }
+                    }
+                }
+            }
+            return null; // Button not found
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿public static class PlayerValues
 {
     public static double Money { get; set; }
-    public static double MoneyPerSecond { get; set; }
     public static double LifetimeEarnings { get; set; } // Tracks the total money earned over all time
     public static double PrestigeLevels { get; set; } // Tracks the current number of Prestige Levels
     public static double StartingLifetimeEarnings { get; set; } // The amount of Lifetime Earnings at the last reset
@@ -18,12 +17,5 @@
     public static void SpendMoney(double amount)
     {
         Money -= amount;
-    }
-
-    public static void ResetForPrestige()
-    {
-        Money = 0;
-        MoneyPerSecond = 0;
-        // Do not reset LifetimeEarnings here as it is used for calculating prestige levels
     }
 }

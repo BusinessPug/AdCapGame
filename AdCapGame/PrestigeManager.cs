@@ -18,11 +18,10 @@ public class PrestigeManager
     public static void ResetGame()
     {
         var newPrestigeLevels = PrestigeManager.CalculateNewPrestigeLevels();
-        PlayerValues.ResetForPrestige();
         PlayerValues.StartingLifetimeEarnings = PlayerValues.LifetimeEarnings;
         PlayerValues.PrestigeLevels += newPrestigeLevels;
-        // clear the HashSet of purchased upgrades
         UpgradeMenu.purchasedUpgrades.Clear();
+        BusinessUnlocks.unlockedItems.Clear();
         OnResetGame?.Invoke();
     }
 }

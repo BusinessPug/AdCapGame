@@ -47,49 +47,27 @@ namespace AdCapGame
         private string GetNameOfBusiness(Business business)
         {
             if (business.GetType().Name == "Business1")
-            {
                 return "Peak Insights";
-            }
             else if (business.GetType().Name == "Business2")
-            {
                 return "Data Heights";
-            }
             else if (business.GetType().Name == "Business3")
-            {
                 return "River Metrics";
-            }
             else if (business.GetType().Name == "Business4")
-            {
                 return "Tree Path Lab";
-            }
             else if (business.GetType().Name == "Business5")
-            {
                 return "Moon Tech Co";
-            }
             else if (business.GetType().Name == "Business6")
-            {
                 return "Sky Growth";
-            }
             else if (business.GetType().Name == "Business7")
-            {
                 return "Hill Trends";
-            }
             else if (business.GetType().Name == "Business8")
-            {
                 return "Star Analysis";
-            }
             else if (business.GetType().Name == "Business9")
-            {
                 return "Cloud Market";
-            }
             else if (business.GetType().Name == "Business10")
-            {
                 return "Wave Stats";
-            }
             else
-            {
                 return "All Businesses";
-            }
         }
 
         public bool IsGeneratingRevenue
