@@ -131,7 +131,6 @@ namespace AdCapGame
                 };
 
                 image.MouseEnter += (s, e) => ShowDescription(s as Image);
-                image.MouseLeave += (s, e) => HideDescription();
 
                 if (unlocksGrid.RowDefinitions.Count <= row)
                 {
@@ -183,14 +182,7 @@ namespace AdCapGame
         private void ShowDescription(Image image)
         {
             var description = image.Tag as string;
-            // Display description, e.g., in a tooltip, status bar, or another designated area
             image.ToolTip = description;
-        }
-
-        private void HideDescription()
-        {
-            // Hide the description when the mouse leaves
-            // Example: image.ToolTip = null;
         }
 
         public class UnlockItem
