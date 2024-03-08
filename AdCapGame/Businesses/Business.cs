@@ -12,7 +12,7 @@ namespace AdCapGame
         private readonly double initialTime;
         private double time;
         private double earningAdd;
-        private readonly double costCoefficient;
+        public readonly double costCoefficient;
         public bool isGeneratingRevenue = false;
         public bool isGeneratingRevenuePerSecond = false;
         private double multiplier = 1.0; // Initial multiplier value
@@ -181,26 +181,36 @@ namespace AdCapGame
             this.multiplier *= (1 + PlayerValues.PrestigeLevels * PlayerValues.PrestigeLevelsMultiplier);
         }
 
-        public async Task Purchase()
+        public async Task<bool> Purchase(int amountToPurchase)
         {
-            if (PlayerValues.Money >= cost)
+            double totalCost = 0;
+            double tempCost = cost;
+            for (int i = 0; i < amountToPurchase; i++)
             {
-                AmountOwned++;
-                PlayerValues.SpendMoney(cost);
-                cost *= costCoefficient;
-                Revenue += earningAdd; // this gets multiplied by the multiplier at a different stage
+                totalCost += tempCost;
+                tempCost *= costCoefficient;
+            }
+
+            if (PlayerValues.Money >= totalCost)
+            {
+                for (int i = 0; i < amountToPurchase; i++)
+                {
+                    AmountOwned++;
+                    PlayerValues.SpendMoney(cost);
+                    cost *= costCoefficient;
+                    Revenue += earningAdd;
+                    // Further logic as needed
+                }
                 if (!isGeneratingRevenue)
                 {
                     isGeneratingRevenue = true;
                     await StartGeneratingRevenueAsync();
                 }
-                if (Time < 100)
-                {
-                    revenuePerSecond = CalculateRevenuePerSecond();
-                    await StartGeneratingRevenueAsync();
-                }
+                return true;
             }
+            return false; // Indicate purchase was not successful due to insufficient funds
         }
+
 
         protected void AdjustTimeForMilestones()
         {

@@ -4,7 +4,8 @@
         Title="Adventure Capitalist Like Game"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        RenderOptions.BitmapScalingMode="Fant">
+        RenderOptions.BitmapScalingMode="Fant"
+        KeyUp="Window_KeyUp">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -128,7 +129,7 @@
                 <TextBlock Grid.Column="1" Text="Owned" FontWeight="Bold"/>
                 <TextBlock Grid.Column="2" Text="Revenue" FontWeight="Bold"/>
                 <TextBlock Grid.Column="3" Text="Progress" FontWeight="Bold"/>
-                <TextBlock Grid.Column="4" Text="Upgrade" FontWeight="Bold"/>
+                <Button Grid.Column="4" Content="Upgrade x1" FontWeight="Bold" Foreground="White" Click="UpgradeAmount_Click" Name="UpgradeAmountButton" BorderBrush="Black" IsMouseDirectlyOverChanged="UpgradeAmountButton_IsMouseDirectlyOverChanged"/>
 
                 <!-- Business Rows -->
 

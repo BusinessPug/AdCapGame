@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Timer = System.Timers.Timer;
 
@@ -27,7 +26,11 @@ namespace AdCapGame
         private DispatcherTimer uiUpdateTimer;
         private DispatcherTimer upgradeTimer = new DispatcherTimer();
         private string currentButtonName = string.Empty;
-        private Dictionary<string, Action> buttonToPurchaseActionMap;
+        private Dictionary<string, Func<int, Task>> buttonToPurchaseActionMap;
+        private string upgradeAmount = "Upgrade 1x";
+        private string CostString;
+        private double CostValue;
+        private Dictionary<string, Business> buttonNameToBusinessMap;
         public List<Business> GetAllBusinesses() => new List<Business> { business1, business2, business3, business4, business5, business6, business7, business8, business9, business10 };
 
         public MainWindow()
@@ -36,18 +39,32 @@ namespace AdCapGame
             PlayerValues.Money = 5;
             InitializeGame();
 
-            buttonToPurchaseActionMap = new Dictionary<string, Action>
+            buttonToPurchaseActionMap = new Dictionary<string, Func<int, Task>>
             {
-                { "B1UpgradeButton", () => business1.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B2UpgradeButton", () => business2.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B3UpgradeButton", () => business3.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B4UpgradeButton", () => business4.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B5UpgradeButton", () => business5.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B6UpgradeButton", () => business6.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B7UpgradeButton", () => business7.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B8UpgradeButton", () => business8.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B9UpgradeButton", () => business9.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B10UpgradeButton", () => business10.Purchase().ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B1UpgradeButton", async (amount) => await business1.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B2UpgradeButton", async (amount) => await business2.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B3UpgradeButton", async (amount) => await business3.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B4UpgradeButton", async (amount) => await business4.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B5UpgradeButton", async (amount) => await business5.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B6UpgradeButton", async (amount) => await business6.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B7UpgradeButton", async (amount) => await business7.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B8UpgradeButton", async (amount) => await business8.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B9UpgradeButton", async (amount) => await business9.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
+                { "B10UpgradeButton", async (amount) => await business10.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) } 
+            };
+
+            buttonNameToBusinessMap = new Dictionary<string, Business>
+            {
+                { "B1UpgradeButton", business1 },
+                { "B2UpgradeButton", business2 },
+                { "B3UpgradeButton", business3 },
+                { "B4UpgradeButton", business4 },
+                { "B5UpgradeButton", business5 },
+                { "B6UpgradeButton", business6 },
+                { "B7UpgradeButton", business7 },
+                { "B8UpgradeButton", business8 },
+                { "B9UpgradeButton", business9 },
+                { "B10UpgradeButton", business10 }
             };
 
             // Initialize the timer
@@ -91,39 +108,118 @@ namespace AdCapGame
 
         private void GenericButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Button button && buttonToPurchaseActionMap.ContainsKey(button.Name))
+            if (sender is Button button)
             {
+                currentButtonName = button.Name;
+
+                // Capture the mouse to the button
+                button.CaptureMouse();
+
+                // Check if the Shift key is held down and start the timer
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
-                    // Shift key is held down, start auto-upgrade
-                    currentButtonName = button.Name;
+                    // Start your repeating action
                     upgradeTimer.Start();
                 }
                 else
                 {
-                    // No Shift key, perform a single upgrade
-                    buttonToPurchaseActionMap[button.Name]?.Invoke();
+                    // Perform the action once
+                    if (buttonToPurchaseActionMap.TryGetValue(currentButtonName, out var action))
+                    {
+                        if (buttonNameToBusinessMap.TryGetValue(currentButtonName, out Business business))
+                        {
+                            int amountToPurchase = GetAmountToPurchase(business);
+                            if (amountToPurchase > 0)
+                            {
+                                action.Invoke(amountToPurchase);
+                            }
+                        }
+                    }
                 }
             }
         }
 
         private void GenericButton_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            // Stop the auto-upgrade timer if it was started
-            upgradeTimer.Stop();
-            currentButtonName = string.Empty; // Reset the button name
+            if (sender is Button button)
+            {
+                // Release the mouse capture
+                button.ReleaseMouseCapture();
+
+                // Stop the repeating action
+                if (button.Name == currentButtonName)
+                {
+                    upgradeTimer.Stop();
+                    currentButtonName = string.Empty;
+                }
+            }
+        }
+
+        // Optionally handle the KeyUp event if the Shift key is the trigger
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
+            {
+                // Stop the repeating action if the Shift key was released
+                if (!string.IsNullOrEmpty(currentButtonName))
+                {
+                    upgradeTimer.Stop();
+                    currentButtonName = string.Empty;
+                }
+            }
+        }
+
+
+        private int GetAmountToPurchase(Business business)
+        {
+            int amountToPurchase = 0;
+            double totalCost = 0;
+            double tempCost = business.Cost;
+
+            switch (upgradeAmount)
+            {
+                case "Upgrade 1x":
+                    amountToPurchase = 1;
+                    break;
+                case "Upgrade 10x":
+                    amountToPurchase = 10;
+                    break;
+                case "Upgrade 100x":
+                    amountToPurchase = 100;
+                    break;
+                case "Upgrade MAX":
+                    while (PlayerValues.Money >= totalCost + tempCost)
+                    {
+                        amountToPurchase++;
+                        totalCost += tempCost;
+                        tempCost *= business.costCoefficient;
+                    }
+                    break;
+            }
+
+            return amountToPurchase;
         }
 
         private void UpgradeTimer_Tick(object sender, EventArgs e)
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(async () => // You should also handle this asynchronously
             {
                 if (!string.IsNullOrEmpty(currentButtonName) && buttonToPurchaseActionMap.TryGetValue(currentButtonName, out var action))
                 {
-                    action?.Invoke();
+                    // Determine the amount to purchase based on the current upgrade amount.
+                    // Assuming GetAmountToPurchase() has been implemented and works properly.
+                    if (buttonNameToBusinessMap.TryGetValue(currentButtonName, out Business business))
+                    {
+                        int amountToPurchase = GetAmountToPurchase(business);
+                        if (amountToPurchase > 0)
+                        {
+                            await action.Invoke(amountToPurchase);
+                        }
+                    }
                 }
             });
         }
+
 
         private Task CheckForAutoSave()
         {
@@ -173,27 +269,87 @@ namespace AdCapGame
 
         private void UpdateBusinessUI(Business business, Button upgradeButton, TextBlock ownedText, TextBlock revenueText)
         {
-            // Convert the business cost to a metric representation with 2 decimal places
-            string CostString = business.Cost.ToKMBTQ();
-            upgradeButton.Content = $"(${CostString})";
-            upgradeButton.Background = PlayerValues.Money > business.Cost ? new SolidColorBrush(Color.FromArgb(128, 0, 255, 0)) : new SolidColorBrush(Color.FromArgb(128, 255, 0, 0));
-            ownedText.Text = $"Owned: {business.AmountOwned}";
-            if (business.Time > 100)
+            double costForDisplay = 0;
+            int maxUpgrades = 0;
+            switch (upgradeAmount)
             {
-                string RevenueString = (business.Revenue * business.Multiplier).ToKMBTQ();
-                revenueText.Text = $"${RevenueString}";
+                case "Upgrade 1x":
+                    costForDisplay = business.Cost;
+                    break;
+                case "Upgrade 10x":
+                    costForDisplay = UpgradexCost(business, 10);
+                    break;
+                case "Upgrade 100x":
+                    costForDisplay = UpgradexCost(business, 100);
+                    break;
+                case "Upgrade MAX":
+                    maxUpgrades = GetMaxAffordableUpgrades(business);
+                    costForDisplay = UpgradexCost(business, maxUpgrades);
+                    break;
+            }
+
+            CostString = costForDisplay.ToKMBTQ();
+            CostValue = costForDisplay;
+            if (upgradeAmount == "Upgrade MAX")
+            {
+                upgradeButton.Content = maxUpgrades > 0 ? $"{maxUpgrades}x (${CostString})" : $"({UpgradexCost(business, 1).ToKMBTQ()})";
+                upgradeButton.Background = maxUpgrades > 0 ? new SolidColorBrush(Color.FromArgb(128, 0, 255, 0)) :
+                    new SolidColorBrush(Color.FromArgb(128, 255, 0, 0));
             }
             else
             {
-                string RevenueString = (business.RevenuePerSecond).ToKMBTQ();
-                revenueText.Text = $"${RevenueString}/s";
+                upgradeButton.Content = $"(${CostString})";
+                upgradeButton.Background = PlayerValues.Money >= CostValue ? new SolidColorBrush(Color.FromArgb(128, 0, 255, 0)) :
+                    new SolidColorBrush(Color.FromArgb(128, 255, 0, 0));
             }
-            if (business.AmountOwned == 0)
-            {
-                string EarningAddString = (business.EarningAdd * business.Multiplier).ToKMBTQ();
-                revenueText.Text = $"${EarningAddString}";
-            }
+            ownedText.Text = $"Owned: {business.AmountOwned}";
+
+            // Update revenue text
+            string revenueString = business.AmountOwned == 0
+                ? (business.EarningAdd * business.Multiplier).ToKMBTQ()
+                : (business.Time > 100 ? (business.Revenue * business.Multiplier).ToKMBTQ() : (business.RevenuePerSecond).ToKMBTQ() + "/s");
+
+            revenueText.Text = $"${revenueString}";
         }
+
+        private double UpgradexCost(Business business, int amount)
+        {
+            double totalCost = 0;
+            double cost = business.Cost;
+            if (amount == 0) // Assume this means "MAX"
+            {
+                while (PlayerValues.Money >= cost)
+                {
+                    PlayerValues.Money -= cost;
+                    totalCost += cost;
+                    cost *= business.costCoefficient;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    totalCost += cost;
+                    cost *= business.costCoefficient;
+                }
+            }
+            return totalCost;
+        }
+
+        private int GetMaxAffordableUpgrades(Business business)
+        {
+            int upgrades = 0;
+            double cost = business.Cost;
+            double money = PlayerValues.Money;
+            while (money >= cost)
+            {
+                money -= cost;
+                cost *= business.costCoefficient;
+                upgrades++;
+            }
+            return upgrades;
+        }
+
 
         private void UpgradeMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -444,6 +600,35 @@ namespace AdCapGame
             };
             autoSaveTimer.AutoReset = true;
             autoSaveTimer.Enabled = true;
+        }
+
+        private void UpgradeAmount_Click(object sender, RoutedEventArgs e)
+        {
+            if (upgradeAmount == "Upgrade 1x")
+            {
+                upgradeAmount = "Upgrade 10x";
+                UpgradeAmountButton.Content = "Upgrade 10x";
+            }
+            else if (upgradeAmount == "Upgrade 10x")
+            {
+                upgradeAmount = "Upgrade 100x";
+                UpgradeAmountButton.Content = "Upgrade 100x";
+            }
+            else if (upgradeAmount == "Upgrade 100x")
+            {
+                upgradeAmount = "Upgrade MAX";
+                UpgradeAmountButton.Content = "Upgrade MAX";
+            }
+            else if (upgradeAmount == "Upgrade MAX")
+            {
+                upgradeAmount = "Upgrade 1x";
+                UpgradeAmountButton.Content = "Upgrade 1x";
+            }
+        }
+
+        private void UpgradeAmountButton_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }
