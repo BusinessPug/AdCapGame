@@ -32,7 +32,7 @@ namespace AdCapGame
         public MainWindow()
         {
             InitializeComponent();
-            PlayerValues.Money = 5e5;
+            PlayerValues.Money = 5;
             InitializeGame();
 
             buttonToPurchaseActionMap = new Dictionary<string, Action>
