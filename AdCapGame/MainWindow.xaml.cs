@@ -155,7 +155,6 @@ namespace AdCapGame
             }
         }
 
-        // Optionally handle the KeyUp event if the Shift key is the trigger
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
@@ -226,7 +225,7 @@ namespace AdCapGame
             string autoSavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AdCapAutosave.adcap");
             if (File.Exists(autoSavePath))
             {
-                var result = MessageBox.Show("An autosave file was found. Do you want to load it?", "Autosave found", MessageBoxButton.YesNo);
+                var result = MessageBox.Show("An autosave file was found. Do you want to load it?", "Autosave found", MessageBoxButton.YesNo);  // this will need to be changed out for a prettier message box than MessageBox
                 if (result == MessageBoxResult.Yes)
                 {
                     SaveLoad.LoadGame(businesses, autoSavePath);
