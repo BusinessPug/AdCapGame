@@ -199,11 +199,15 @@ namespace AdCapGame
                     PlayerValues.SpendMoney(cost);
                     cost *= costCoefficient;
                     Revenue += earningAdd;
-                    // Further logic as needed
                 }
                 if (!isGeneratingRevenue)
                 {
                     isGeneratingRevenue = true;
+                    await StartGeneratingRevenueAsync();
+                }
+                if (Time < 100)
+                {
+                    revenuePerSecond = CalculateRevenuePerSecond();
                     await StartGeneratingRevenueAsync();
                 }
                 return true;
