@@ -32,7 +32,7 @@ namespace AdCapGame
         public MainWindow()
         {
             InitializeComponent();
-            PlayerValues.Money = 5;
+            PlayerValues.Money = 5e5;
             InitializeGame();
 
             buttonToPurchaseActionMap = new Dictionary<string, Action>
@@ -185,7 +185,7 @@ namespace AdCapGame
             }
             else
             {
-                string RevenueString = (business.RevenuePerSecond * business.Multiplier).ToKMBTQ();
+                string RevenueString = (business.RevenuePerSecond).ToKMBTQ();
                 revenueText.Text = $"${RevenueString}/s";
             }
             if (business.AmountOwned == 0)
@@ -249,7 +249,7 @@ namespace AdCapGame
             if (targetBusiness != null)
             {
                 targetBusiness.Multiplier *= multiplier;
-
+                targetBusiness.RevenuePerSecond = targetBusiness.CalculateRevenuePerSecond();
                 ShowPopup($"Business {businessId}'s profit multiplied by {multiplier}.", 1500);
             }
             else

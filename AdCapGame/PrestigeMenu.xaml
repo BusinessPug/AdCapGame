@@ -13,7 +13,7 @@
     </Window.Resources>
 
     <Window.Background>
-        <ImageBrush ImageSource="Assets/UpMenu.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="Assets/PrestigeMenu.jpg" Stretch="UniformToFill"/>
     </Window.Background>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">

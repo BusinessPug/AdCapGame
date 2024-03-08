@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Adventure Capitalist Like Game"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        RenderOptions.BitmapScalingMode="Fant">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -31,22 +32,40 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        <Style TargetType="ProgressBar">
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Foreground" Value="#B04FB0FF"/>
-            <!-- Setter for smoothness -->
+
+        <Style TargetType="{x:Type ProgressBar}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ProgressBar">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="5">
-                            <Grid x:Name="PART_Track">
-                                <Rectangle x:Name="PART_Indicator" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Left"/>
-                            </Grid>
-                        </Border>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid Height="20" Background="{TemplateBinding Background}">
+                            <Border x:Name="PART_Track" CornerRadius="4" BorderThickness="1"
+                                    BorderBrush="White">
+                            </Border>
+
+                            <Border BorderThickness="1"
+                                    x:Name="PART_Indicator"
+                                    HorizontalAlignment="Left"
+                                    Background="#B04FB0FF"
+                                    BorderBrush="#B04FB0FF"
+                                    Margin="1,0,0,0"
+                                    MaxHeight="18">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3,3,3,3"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ProgressBar}}}" Value="100">
+                                                <Setter Property="CornerRadius" Value="4"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
         </Style>
 
         <Style TargetType="TextBlock">
@@ -105,6 +124,7 @@
 
                 <!-- Business Headers -->
                 <TextBlock Grid.Column="0" Text="Business" FontWeight="Bold"/>
+                <Image Grid.Column="0" Source="Assets/All-Businesses.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Column="1" Text="Owned" FontWeight="Bold"/>
                 <TextBlock Grid.Column="2" Text="Revenue" FontWeight="Bold"/>
                 <TextBlock Grid.Column="3" Text="Progress" FontWeight="Bold"/>
@@ -114,6 +134,7 @@
 
                 <!-- Business 1 -->
                 <TextBlock Grid.Row="1" Text="Peak Insights" VerticalAlignment="Center"/>
+                <Image Grid.Row="1" Source="Assets/Peak-Insights.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Name="B1OwnedText"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Name="B1Rev"/>
                 <ProgressBar Grid.Row="1" Grid.Column="3" Maximum="100" Height="20" Name="B1Prog"/>
@@ -123,6 +144,7 @@
 
                 <!-- Business 2 -->
                 <TextBlock Grid.Row="2" Text="Data Heights" VerticalAlignment="Center"/>
+                <Image Grid.Row="2" Source="Assets/Data-Heights.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Name="B2OwnedText"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Name="B2Rev"/>
                 <ProgressBar Grid.Row="2" Grid.Column="3" Maximum="100" Height="20" Name="B2Prog"/>
@@ -132,6 +154,7 @@
 
                 <!-- Business 3 -->
                 <TextBlock Grid.Row="3" Text="River Metrics" VerticalAlignment="Center"/>
+                <Image Grid.Row="3" Source="Assets/River-Metrics.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Name="B3OwnedText"/>
                 <TextBlock Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Name="B3Rev"/>
                 <ProgressBar Grid.Row="3" Grid.Column="3" Maximum="100" Height="20" Name="B3Prog"/>
@@ -141,6 +164,7 @@
 
                 <!-- Business 4-->
                 <TextBlock Grid.Row="4" Text="Tree Path Lab" VerticalAlignment="Center"/>
+                <Image Grid.Row="4" Source="Assets/Tree-Path-Lab.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Name="B4OwnedText"/>
                 <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Name="B4Rev"/>
                 <ProgressBar Grid.Row="4" Grid.Column="3" Maximum="100" Height="20" Name="B4Prog"/>
@@ -150,6 +174,7 @@
 
                 <!-- Business 5 -->
                 <TextBlock Grid.Row="5" Text="Moon Tech Co." VerticalAlignment="Center"/>
+                <Image Grid.Row="5" Source="Assets/Moon-Tech-Co.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Name="B5OwnedText"/>
                 <TextBlock Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Name="B5Rev"/>
                 <ProgressBar Grid.Row="5" Grid.Column="3" Maximum="100" Height="20" Name="B5Prog"/>
@@ -159,6 +184,7 @@
 
                 <!-- Business 6 -->
                 <TextBlock Grid.Row="6" Text="Sky Growth" VerticalAlignment="Center"/>
+                <Image Grid.Row="6" Source="Assets/Sky-Growth.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Name="B6OwnedText"/>
                 <TextBlock Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Name="B6Rev"/>
                 <ProgressBar Grid.Row="6" Grid.Column="3" Maximum="100" Height="20" Name="B6Prog"/>
@@ -168,6 +194,7 @@
 
                 <!-- Business 7 -->
                 <TextBlock Grid.Row="7" Text="Hill Trends" VerticalAlignment="Center"/>
+                <Image Grid.Row="7" Source="Assets/Hill-Trends.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Name="B7OwnedText"/>
                 <TextBlock Grid.Row="7" Grid.Column="2"  VerticalAlignment="Center" Name="B7Rev"/>
                 <ProgressBar Grid.Row="7" Grid.Column="3" Maximum="100" Height="20" Name="B7Prog"/>
@@ -177,6 +204,7 @@
 
                 <!-- Business 8 -->
                 <TextBlock Grid.Row="8" Text="Star Analysis" VerticalAlignment="Center"/>
+                <Image Grid.Row="8" Source="Assets/Star-Analysis.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Name="B8OwnedText"/>
                 <TextBlock Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" Name="B8Rev"/>
                 <ProgressBar Grid.Row="8" Grid.Column="3" Maximum="100" Height="20" Name="B8Prog"/>
@@ -186,6 +214,7 @@
 
                 <!-- Business 9 -->
                 <TextBlock Grid.Row="9" Text="Cloud Market" VerticalAlignment="Center"/>
+                <Image Grid.Row="9" Source="Assets/Cloud-Market.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Name="B9OwnedText"/>
                 <TextBlock Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" Name="B9Rev"/>
                 <ProgressBar Grid.Row="9" Grid.Column="3" Maximum="100" Height="20" Name="B9Prog"/>
@@ -195,6 +224,7 @@
 
                 <!-- Business 10 -->
                 <TextBlock Grid.Row="10" Text="Wave Stats" VerticalAlignment="Center"/>
+                <Image Grid.Row="10" Source="Assets/Wave-Stats.png" Height="20" HorizontalAlignment="Right" Opacity="0.7"/>
                 <TextBlock Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Name="B10OwnedText"/>
                 <TextBlock Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" Name="B10Rev"/>
                 <ProgressBar Grid.Row="10" Grid.Column="3" Maximum="100" Height="20" Name="B10Prog"/>

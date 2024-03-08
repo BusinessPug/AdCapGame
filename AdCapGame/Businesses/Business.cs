@@ -5,6 +5,7 @@ namespace AdCapGame
 {
     public abstract class Business : INotifyPropertyChanged
     {
+        private string name;
         private int amountOwned;
         private double revenue;
         private double cost;
@@ -38,8 +39,57 @@ namespace AdCapGame
             this.costCoefficient = costCoefficient;
             this.initialTime = time;
             this.time = time;
+            this.name = this.GetType().Name;
             this.earningAdd = earningAdd;
             UpdateProfitWithPrestige(); // Ensure multiplier is correct at instantiation
+        }
+
+        private string GetNameOfBusiness(Business business)
+        {
+            if (business.GetType().Name == "Business1")
+            {
+                return "Peak Insights";
+            }
+            else if (business.GetType().Name == "Business2")
+            {
+                return "Data Heights";
+            }
+            else if (business.GetType().Name == "Business3")
+            {
+                return "River Metrics";
+            }
+            else if (business.GetType().Name == "Business4")
+            {
+                return "Tree Path Lab";
+            }
+            else if (business.GetType().Name == "Business5")
+            {
+                return "Moon Tech Co";
+            }
+            else if (business.GetType().Name == "Business6")
+            {
+                return "Sky Growth";
+            }
+            else if (business.GetType().Name == "Business7")
+            {
+                return "Hill Trends";
+            }
+            else if (business.GetType().Name == "Business8")
+            {
+                return "Star Analysis";
+            }
+            else if (business.GetType().Name == "Business9")
+            {
+                return "Cloud Market";
+            }
+            else if (business.GetType().Name == "Business10")
+            {
+                return "Wave Stats";
+            }
+            else
+            {
+                return "All Businesses";
+            }
         }
 
         public bool IsGeneratingRevenue
@@ -181,6 +231,7 @@ namespace AdCapGame
             {
                 Time /= 2;
                 // `this` refers to the current business instance
+                BusinessUnlocks.unlockedItems.Add(GetNameOfBusiness(this) + " " + AmountOwned);
                 ShowPopupMessage($"Time halved for {this.GetType().Name}!");
             }
             ApplySpecialUnlocks();
@@ -190,7 +241,7 @@ namespace AdCapGame
         {
             if (SpecialUnlocks.TryGetValue(AmountOwned, out var unlockInfo))
             {
-
+                BusinessUnlocks.unlockedItems.Add(GetNameOfBusiness(this) + " " + AmountOwned);
                 switch (unlockInfo.Item1)
                 {
                     case SpecialUnlockType.Multiplier:
