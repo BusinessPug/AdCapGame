@@ -44,7 +44,7 @@ namespace AdCapGame
             UpdateProfitWithPrestige(); // Ensure multiplier is correct at instantiation
         }
 
-        private string GetNameOfBusiness(Business business)
+        public string GetNameOfBusiness(Business business)
         {
             if (business.GetType().Name == "Business1")
                 return "Peak Insights";
