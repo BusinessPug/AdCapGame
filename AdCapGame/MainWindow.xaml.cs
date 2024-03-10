@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +9,19 @@ using Timer = System.Timers.Timer;
 
 namespace AdCapGame
 {
+
+    /// <summary>
+    /// This is just a mess. The IBusinessManager interface is being worked on.
+    /// TODO:
+    /// Remove IBusinessManager from MainWindow class
+    /// Move upgrade logic from MainWindow to a new UpgradeManager class
+    /// The UpgradeStruct thus needs to be reworked as well, along with all other upgrade logic
+    /// Prestige Level Effectiveness needs to be implemented
+    /// Move other non UI based logic away from MainWindow
+    /// General Cleanup
+    /// restore OOP principles to the project
+    /// </summary>
+
     public partial class MainWindow : Window, IBusinessManager
     {
         private Business1 business1;
@@ -33,12 +46,50 @@ namespace AdCapGame
         private Dictionary<string, Business> buttonNameToBusinessMap;
         public List<Business> GetAllBusinesses() => new List<Business> { business1, business2, business3, business4, business5, business6, business7, business8, business9, business10 };
 
-        public MainWindow()
+        // maybe a little too disorienting of a variable list
+
+
+        public MainWindow() // a lot here needs cleaning
         {
             InitializeComponent();
             PlayerValues.Money = 5;
             InitializeGame();
 
+            PopulatePurchaseToAction();
+
+            PopulateButtonToBusiness();
+
+            upgradeTimer = new DispatcherTimer();
+            upgradeTimer.Interval = TimeSpan.FromMilliseconds(50);
+            upgradeTimer.Tick += UpgradeTimer_Tick;
+
+            PrestigeManager.OnResetGame += ResetAndApplyPrestige;
+            SetupAutoSaveTimer();
+            this.Closing += MainWindow_Closing;
+        }
+
+        private async void InitializeGame() // Oh boy. gonna have to figure out the removal of IBusinessManager here.
+        {
+            business1 = new Business1(this);
+            business2 = new Business2(this);
+            business3 = new Business3(this);
+            business4 = new Business4(this);
+            business5 = new Business5(this);
+            business6 = new Business6(this);
+            business7 = new Business7(this);
+            business8 = new Business8(this);
+            business9 = new Business9(this);
+            business10 = new Business10(this);
+
+            AddBusinessesToList();
+
+            UpdateUI(); // Initial UI update to reflect starting state.
+            SetupUiUpdateTimer();
+            await CheckForAutoSave();
+        }
+
+        private void PopulatePurchaseToAction() // There is most likely a better way to do this
+        {
             buttonToPurchaseActionMap = new Dictionary<string, Func<int, Task>>
             {
                 { "B1UpgradeButton", async (amount) => await business1.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
@@ -50,9 +101,12 @@ namespace AdCapGame
                 { "B7UpgradeButton", async (amount) => await business7.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
                 { "B8UpgradeButton", async (amount) => await business8.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
                 { "B9UpgradeButton", async (amount) => await business9.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) },
-                { "B10UpgradeButton", async (amount) => await business10.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) } 
+                { "B10UpgradeButton", async (amount) => await business10.Purchase(amount).ContinueWith(task => UpdateUI(), TaskScheduler.FromCurrentSynchronizationContext()) }
             };
+        }
 
+        private void PopulateButtonToBusiness()
+        {
             buttonNameToBusinessMap = new Dictionary<string, Business>
             {
                 { "B1UpgradeButton", business1 },
@@ -66,30 +120,10 @@ namespace AdCapGame
                 { "B9UpgradeButton", business9 },
                 { "B10UpgradeButton", business10 }
             };
-
-            // Initialize the timer
-            upgradeTimer = new DispatcherTimer();
-            upgradeTimer.Interval = TimeSpan.FromMilliseconds(50); // Adjust interval as needed
-            upgradeTimer.Tick += UpgradeTimer_Tick;
-
-            PrestigeManager.OnResetGame += ResetAndApplyPrestige;
-            SetupAutoSaveTimer();
-            this.Closing += MainWindow_Closing;
         }
 
-        private async void InitializeGame()
+        private void AddBusinessesToList()
         {
-            business1 = new Business1(this);
-            business2 = new Business2(this);
-            business3 = new Business3(this);
-            business4 = new Business4(this);
-            business5 = new Business5(this);
-            business6 = new Business6(this);
-            business7 = new Business7(this);
-            business8 = new Business8(this);
-            business9 = new Business9(this);
-            business10 = new Business10(this);
-
             businesses.Add(business1);
             businesses.Add(business2);
             businesses.Add(business3);
@@ -100,13 +134,9 @@ namespace AdCapGame
             businesses.Add(business8);
             businesses.Add(business9);
             businesses.Add(business10);
-
-            UpdateUI(); // Initial UI update to reflect starting state.
-            SetupUiUpdateTimer();
-            await CheckForAutoSave();
         }
 
-        private void GenericButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void GenericButton_PreviewMouseDown(object sender, MouseButtonEventArgs e) // this is a mess to read, but it works so it stays for now
         {
             if (sender is Button button)
             {
@@ -168,8 +198,7 @@ namespace AdCapGame
             }
         }
 
-
-        private int GetAmountToPurchase(Business business)
+        private int GetAmountToPurchase(Business business) // needs to go into Business class at some point
         {
             int amountToPurchase = 0;
             double totalCost = 0;
@@ -201,12 +230,10 @@ namespace AdCapGame
 
         private void UpgradeTimer_Tick(object sender, EventArgs e)
         {
-            Dispatcher.Invoke(async () => // You should also handle this asynchronously
+            Dispatcher.Invoke(async () =>
             {
                 if (!string.IsNullOrEmpty(currentButtonName) && buttonToPurchaseActionMap.TryGetValue(currentButtonName, out var action))
                 {
-                    // Determine the amount to purchase based on the current upgrade amount.
-                    // Assuming GetAmountToPurchase() has been implemented and works properly.
                     if (buttonNameToBusinessMap.TryGetValue(currentButtonName, out Business business))
                     {
                         int amountToPurchase = GetAmountToPurchase(business);
@@ -219,8 +246,7 @@ namespace AdCapGame
             });
         }
 
-
-        private Task CheckForAutoSave()
+        private Task CheckForAutoSave() // need to implement the usage of AppData at some point instead of MyDocuments
         {
             string autoSavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AdCapAutosave.adcap");
             if (File.Exists(autoSavePath))
@@ -249,7 +275,7 @@ namespace AdCapGame
             UpdateUI(); // Continuously update UI elements based on the current game state.
         }
 
-        private void UpdateUI()
+        private void UpdateUI() // most likely a cleaner way to do this with objects. will look into that
         {
             string CurrencyString = PlayerValues.Money.ToKMBTQ();
             CurrencyLabel.Text = $"Total Revenue: ${CurrencyString}";
@@ -266,7 +292,7 @@ namespace AdCapGame
             UpdateBusinessUI(business10, B10UpgradeButton, B10OwnedText, B10Rev);
         }
 
-        private void UpdateBusinessUI(Business business, Button upgradeButton, TextBlock ownedText, TextBlock revenueText)
+        private void UpdateBusinessUI(Business business, Button upgradeButton, TextBlock ownedText, TextBlock revenueText) // Gonna be broken up into smaller methods for readability later
         {
             double costForDisplay = 0;
             int maxUpgrades = 0;
@@ -311,11 +337,11 @@ namespace AdCapGame
             revenueText.Text = $"${revenueString}";
         }
 
-        private double UpgradexCost(Business business, int amount)
+        private double UpgradexCost(Business business, int amount) // more logic that needs to be moved
         {
             double totalCost = 0;
             double cost = business.Cost;
-            if (amount == 0) // Assume this means "MAX"
+            if (amount == 0)
             {
                 while (PlayerValues.Money >= cost)
                 {
@@ -335,7 +361,7 @@ namespace AdCapGame
             return totalCost;
         }
 
-        private int GetMaxAffordableUpgrades(Business business)
+        private int GetMaxAffordableUpgrades(Business business) // more logic that needs to be moved
         {
             int upgrades = 0;
             double cost = business.Cost;
@@ -361,9 +387,8 @@ namespace AdCapGame
             BackgroundImage.Opacity = 1;
         }
 
-        public void ApplyUpgrade(string description)
+        public void ApplyUpgrade(string description) // this is gonna get tricky
         {
-            // Existing patterns
             var businessPattern = @"(Triple|Multiply) Business (?<businessId>\d+) profit( by (?<multiplier>\d+))?";
             var allBusinessPattern = @"(Triple|Multiply) All Businesses profit( by (?<multiplier>\d+))?";
             // New pattern for "Upgrade level effectiveness +x%"
@@ -398,7 +423,7 @@ namespace AdCapGame
             }
         }
 
-        private void ApplyBusinessUpgrade(int businessId, int multiplier)
+        private void ApplyBusinessUpgrade(int businessId, int multiplier) // why was i doing this in the MainWindow class to begin with?
         {
             Business targetBusiness = GetBusinessById(businessId);
             if (targetBusiness != null)
@@ -413,7 +438,7 @@ namespace AdCapGame
             }
         }
 
-        private void ApplyAllBusinessesUpgrade(int multiplier)
+        private void ApplyAllBusinessesUpgrade(int multiplier) // thankfully a straightforward method to move to Business class
         {
             // Apply the multiplier to all businesses
             foreach (var business in businesses)
@@ -424,13 +449,13 @@ namespace AdCapGame
             ShowPopup($"All businesses' profits multiplied by {multiplier}.", 1500);
         }
 
-        private void ApplyEffectivenessUpgrade(double effectivenessIncrease)
+        private void ApplyEffectivenessUpgrade(double effectivenessIncrease) // this probably does work, but isn't implemented yet, so this will be moved at some point and then ill figure out the calls
         {
             PlayerValues.PrestigeLevelsMultiplier += effectivenessIncrease;
             ShowPopup($"Level effectiveness increased by {effectivenessIncrease * 100}%.", 1500);
         }
 
-        private Business GetBusinessById(int id)
+        private Business GetBusinessById(int id) // this will become redundant with proper OOP
         {
             switch (id)
             {
@@ -448,7 +473,7 @@ namespace AdCapGame
             }
         }
 
-        public void ApplyMultiplier(string name, double multiplier)
+        public void ApplyMultiplier(string name, double multiplier) // WHY IS THIS HERE?!
         {
             switch (name)
             {
@@ -489,8 +514,6 @@ namespace AdCapGame
 
         private void PrestigeMenu_Click(object sender, RoutedEventArgs e)
         {
-            // Assuming PrestigeMenu is the class name of your Prestige window
-            // and you have a similar GetInstance method as in your UpgradeMenu
             var prestigeMenu = PrestigeMenu.GetInstance(this);
             ViewboxMain.Opacity = 0.5;
             BackgroundImage.Opacity = 0.5;
@@ -542,7 +565,7 @@ namespace AdCapGame
             UpdateUI();
         }
 
-        public static void ResetAll()
+        public static void ResetAll() // WHAT WAS I THINKING??
         {
             foreach (Business business in businesses)
             {
@@ -550,7 +573,7 @@ namespace AdCapGame
             }
         }
 
-        private void ApplyPrestigeMultiplier()
+        private void ApplyPrestigeMultiplier() // IT'S ONLY DOWNHILL FROM HERE
         {
             double prestigeMultiplier = 1 + (PlayerValues.PrestigeLevels * PlayerValues.PrestigeLevelsMultiplier);
 
@@ -585,7 +608,7 @@ namespace AdCapGame
             openPopups.Clear();
         }
 
-        private void SetupAutoSaveTimer()
+        private void SetupAutoSaveTimer() // this shouldn't be in here either
         {
             Timer autoSaveTimer = new Timer(300000); // 300,000 ms = 5 minutes
             autoSaveTimer.Elapsed += (sender, e) =>
@@ -601,7 +624,7 @@ namespace AdCapGame
             autoSaveTimer.Enabled = true;
         }
 
-        private void UpgradeAmount_Click(object sender, RoutedEventArgs e)
+        private void UpgradeAmount_Click(object sender, RoutedEventArgs e) // there's a better way to do this
         {
             if (upgradeAmount == "Upgrade 1x")
             {
@@ -623,11 +646,6 @@ namespace AdCapGame
                 upgradeAmount = "Upgrade 1x";
                 UpgradeAmountButton.Content = "Upgrade 1x";
             }
-        }
-
-        private void UpgradeAmountButton_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
         }
     }
 }
