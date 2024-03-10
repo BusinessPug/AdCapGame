@@ -2,7 +2,7 @@
 
 public class PrestigeManager
 {
-    public const double DifficultyFactor = 400e12; //
+    public const double DifficultyFactor = 400e15; // this still needs to be dialed in
 
     public static double CalculateNewPrestigeLevels()
     {
